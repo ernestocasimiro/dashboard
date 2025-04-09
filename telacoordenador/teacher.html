@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professores - Sistema Pitruca Camama</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>Pitruca Camama</h2>
+            </div>
+            <ul class="nav-links">
+                <!-- Painel (Visão Geral) -->
+                <li data-tab="dashboard">
+                    <a href="index.html">
+                        <i class="fas fa-tachometer-alt"></i> 
+                        <span>Painel</span>
+                    </a>
+                </li>
+                
+                <!-- Gestão De Alunos -->
+                <li class="has-submenu" data-tab="student-management">
+                    <div class="menu-item">
+                        <i class="fas fa-user-graduate"></i> 
+                        <span>Gestão De Alunos</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li data-tab="register-students">
+                            <a href="students.html">
+                                <i class="fas fa-user-plus"></i> 
+                                <span>Estudantes</span>
+                            </a>
+                        </li>
+                        <li data-tab="attendance">
+                            <a href="attendance.html">
+                                <i class="fas fa-calendar-check"></i> 
+                                <span>Presença</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Gestão Pedagógica -->
+                <li class="has-submenu" data-tab="pedagogical-management">
+                    <div class="menu-item">
+                        <i class="fas fa-chalkboard"></i> 
+                        <span>Gestão Pedagógica</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li data-tab="classes">
+                            <a href="classes.html">
+                                <i class="fas fa-users"></i> 
+                                <span>Turmas</span>
+                            </a>
+                        </li>
+                        <li data-tab="schedule">
+                            <a href="schedule.html">
+                                <i class="fas fa-calendar-alt"></i> 
+                                <span>Horários</span>
+                            </a>
+                        </li>
+                        <li data-tab="tests">
+                            <a href="tests.html">
+                                <i class="fas fa-file-alt"></i> 
+                                <span>Provas</span>
+                            </a>
+                        </li>
+                        <li data-tab="bulletins">
+                            <a href="bulletins.html">
+                                <i class="fas fa-file-invoice"></i> 
+                                <span>Boletins</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Gestão de Professores -->
+                <li class="has-submenu" data-tab="staff-management">
+                    <div class="menu-item">
+                        <i class="fas fa-chalkboard-teacher"></i> 
+                        <span>Gestão de Professores</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li class="active" data-tab="register-teachers">
+                            <a href="teachers.html">
+                                <i class="fas fa-user-plus"></i> 
+                                <span>Professores</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Utilizadores -->
+                <li class="has-submenu" data-tab="users">
+                    <div class="menu-item">
+                        <i class="fas fa-users"></i> 
+                        <span>Utilizadores</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li data-tab="guardians">
+                            <a href="guardians.html">
+                                <i class="fas fa-user-friends"></i> 
+                                <span>Encarregados</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Comunicação -->
+                <li class="has-submenu" data-tab="communication">
+                    <div class="menu-item">
+                        <i class="fas fa-comments"></i> 
+                        <span>Comunicação</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li data-tab="messages">
+                            <a href="messages.html">
+                                <i class="fas fa-envelope"></i> 
+                                <span>Mensagens</span>
+                            </a>
+                        </li>
+                        <li data-tab="notice-board">
+                            <a href="notices.html">
+                                <i class="fas fa-bullhorn"></i> 
+                                <span>Quadro de Avisos</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Configurações -->
+                <li data-tab="settings">
+                    <a href="settings.html">
+                        <i class="fas fa-cog"></i> 
+                        <span>Configurações</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="logout">
+                <i class="fas fa-sign-out-alt"></i> 
+                <span>Sair</span>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <header>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Pesquisar...">
+                </div>
+                <div class="user-info">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user">
+                        <img src="images/semfoto.jpeg" alt="Admin User">
+                        <span>Administrador</span>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="tab-content">
+                <!-- Gestão de Funcionários - Cadastrar Professores/Coordenadores -->
+                <div class="tab-pane active" id="register-teachers">
+                    <div class="section-header">
+                        <h2>Cadastrar Professores/Coordenadores</h2>
+                        <button class="add-btn" id="add-teacher-btn">
+                            <i class="fas fa-plus"></i> Adicionar Funcionário
+                        </button>
+                    </div>
+                    
+                    <div class="filter-controls">
+                        <div class="search-filter">
+                            <input type="text" id="teacher-search" placeholder="Pesquisar funcionários...">
+                        </div>
+                        <div class="dropdown-filter">
+                            <select id="department-filter">
+                                <option value="">Todos os Departamentos</option>
+                                <option value="science">Ciências</option>
+                                <option value="math">Matemática</option>
+                                <option value="portuguese">Português</option>
+                                <option value="history">História</option>
+                                <option value="coordination">Coordenação</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome</th>
+                                    <th>Cargo</th>
+                                    <th>Departamento</th>
+                                    <th>Contato</th>
+                                    <th>Disciplinas</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="teacher-table-body">
+                                <!-- Teacher data will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="pagination">
+                        <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>
+

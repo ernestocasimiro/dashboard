@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presença - Sistema Pitruca Camama</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            <div class="logo">
+                <h2>Pitruca Camama</h2>
+            </div>
+            <ul class="nav-links">
+                <!-- Painel (Visão Geral) -->
+                <li data-tab="dashboard">
+                    <a href="index.html">
+                        <i class="fas fa-tachometer-alt"></i> 
+                        <span>Painel</span>
+                    </a>
+                </li>
+                
+                <!-- Gestão De Alunos -->
+                <li class="has-submenu" data-tab="student-management">
+                    <div class="menu-item">
+                        <i class="fas fa-user-graduate"></i> 
+                        <span>Gestão De Alunos</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li data-tab="register-students">
+                            <a href="students.html">
+                                <i class="fas fa-user-plus"></i> 
+                                <span>Estudantes</span>
+                            </a>
+                        </li>
+                        <li class="active" data-tab="attendance">
+                            <a href="attendance.html">
+                                <i class="fas fa-calendar-check"></i> 
+                                <span>Presença</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Gestão Pedagógica -->
+                <li class="has-submenu" data-tab="pedagogical-management">
+                    <div class="menu-item">
+                        <i class="fas fa-chalkboard"></i> 
+                        <span>Gestão Pedagógica</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li data-tab="classes">
+                            <a href="classes.html">
+                                <i class="fas fa-users"></i> 
+                                <span>Turmas</span>
+                            </a>
+                        </li>
+                        <li data-tab="schedule">
+                            <a href="schedule.html">
+                                <i class="fas fa-calendar-alt"></i> 
+                                <span>Horários</span>
+                            </a>
+                        </li>
+                        <li data-tab="tests">
+                            <a href="tests.html">
+                                <i class="fas fa-file-alt"></i> 
+                                <span>Provas</span>
+                            </a>
+                        </li>
+                        <li data-tab="bulletins">
+                            <a href="bulletins.html">
+                                <i class="fas fa-file-invoice"></i> 
+                                <span>Boletins</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Gestão de Professores -->
+                <li class="has-submenu" data-tab="staff-management">
+                    <div class="menu-item">
+                        <i class="fas fa-chalkboard-teacher"></i> 
+                        <span>Gestão de Professores</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li data-tab="register-teachers">
+                            <a href="teachers.html">
+                                <i class="fas fa-user-plus"></i> 
+                                <span>Professores</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Utilizadores -->
+                <li class="has-submenu" data-tab="users">
+                    <div class="menu-item">
+                        <i class="fas fa-users"></i> 
+                        <span>Utilizadores</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li data-tab="guardians">
+                            <a href="guardians.html">
+                                <i class="fas fa-user-friends"></i> 
+                                <span>Encarregados</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Comunicação -->
+                <li class="has-submenu" data-tab="communication">
+                    <div class="menu-item">
+                        <i class="fas fa-comments"></i> 
+                        <span>Comunicação</span>
+                        <i class="fas fa-chevron-down arrow"></i>
+                    </div>
+                    <ul class="submenu">
+                        <li data-tab="messages">
+                            <a href="messages.html">
+                                <i class="fas fa-envelope"></i> 
+                                <span>Mensagens</span>
+                            </a>
+                        </li>
+                        <li data-tab="notice-board">
+                            <a href="notices.html">
+                                <i class="fas fa-bullhorn"></i> 
+                                <span>Quadro de Avisos</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                
+                <!-- Configurações -->
+                <li data-tab="settings">
+                    <a href="settings.html">
+                        <i class="fas fa-cog"></i> 
+                        <span>Configurações</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="logout">
+                <i class="fas fa-sign-out-alt"></i> 
+                <span>Sair</span>
+            </div>
+        </nav>
+        
+        <main class="content">
+            <header>
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Pesquisar...">
+                </div>
+                <div class="user-info">
+                    <div class="notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="badge">3</span>
+                    </div>
+                    <div class="user">
+                        <img src="images/semfoto.jpeg" alt="Admin User">
+                        <span>Administrador</span>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="tab-content">
+                <!-- Gestão De Alunos - Presença -->
+                <div class="tab-pane active" id="attendance">
+                    <div class="section-header">
+                        <h2>Registro de Presença</h2>
+                        <button class="add-btn">
+                            <i class="fas fa-calendar-check"></i> Marcar Presença
+                        </button>
+                    </div>
+                    
+                    <div class="filter-controls">
+                        <div class="dropdown-filter">
+                            <select id="attendance-class-filter">
+                                <option value="">Selecionar Turma</option>
+                                <option value="class-10A">Turma 10ª Informática A</option>
+                                <option value="class-10B">Turma 10ª Informática B</option>
+                                <option value="class-11">Turma 11ª Informática</option>
+                                <option value="class-12">Turma 12ª Informática</option>
+                                <option value="class-13">Turma 13 Informática</option>
+                            </select>
+                        </div>
+                        <div class="dropdown-filter">
+                            <input type="date" id="attendance-date" value="2025-04-01">
+                        </div>
+                        <div class="search-filter">
+                            <input type="text" placeholder="Pesquisar alunos...">
+                        </div>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nome do Aluno</th>
+                                    <th>Turma</th>
+                                    <th>Data</th>
+                                    <th>Estado</th>
+                                    <th>Observações</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>STU001</td>
+                                    <td>João Silva</td>
+                                    <td>Turma 10ª Informática A</td>
+                                    <td>01/04/2025</td>
+                                    <td><span class="status-badge present">Presente</span></td>
+                                    <td>-</td>
+                                    <td>
+                                        <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>STU002</td>
+                                    <td>Maria Santos</td>
+                                    <td>Turma 10ª Informática A</td>
+                                    <td>01/04/2025</td>
+                                    <td><span class="status-badge present">Presente</span></td>
+                                    <td>-</td>
+                                    <td>
+                                        <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>STU003</td>
+                                    <td>Pedro Oliveira</td>
+                                    <td>Turma 10ª Informática B</td>
+                                    <td>01/04/2025</td>
+                                    <td><span class="status-badge absent">Ausente</span></td>
+                                    <td>Doente</td>
+                                    <td>
+                                        <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>STU004</td>
+                                    <td>Ana Costa</td>
+                                    <td>Turma 10ª Informática A</td>
+                                    <td>01/04/2025</td>
+                                    <td><span class="status-badge late">Atrasado</span></td>
+                                    <td>Chegou 15 minutos atrasado</td>
+                                    <td>
+                                        <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>STU005</td>
+                                    <td>Carlos Ferreira</td>
+                                    <td>Turma 10</td>
+                                    <td>01/04/2025</td>
+                                    <td><span class="status-badge present">Presente</span></td>
+                                    <td>-</td>
+                                    <td>
+                                        <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
+                                        <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="pagination">
+                        <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>
+

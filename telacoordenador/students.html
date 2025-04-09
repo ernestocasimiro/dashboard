@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estudantes - Sistema Pitruca Camama</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <div class="container">
+      <nav class="sidebar">
+          <div class="logo">
+              <h2>Pitruca Camama</h2>
+          </div>
+          <ul class="nav-links">
+            <!-- Painel (Visão Geral) -->
+            <li data-tab="dashboard">
+                <a href="index.html">
+                    <i class="fas fa-tachometer-alt"></i> 
+                    <span>Painel</span>
+                </a>
+            </li>
+            
+            <!-- Gestão De Alunos -->
+            <li class="has-submenu" data-tab="student-management">
+                <div class="menu-item">
+                    <i class="fas fa-user-graduate"></i> 
+                    <span>Gestão De Alunos</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <ul class="submenu">
+                    <li class="active" data-tab="register-students">
+                        <a href="students.html">
+                            <i class="fas fa-user-plus"></i> 
+                            <span>Estudantes</span>
+                        </a>
+                    </li>
+                    <li data-tab="attendance">
+                        <a href="attendance.html">
+                            <i class="fas fa-calendar-check"></i> 
+                            <span>Presença</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <!-- Gestão Pedagógica -->
+            <li class="has-submenu" data-tab="pedagogical-management">
+                <div class="menu-item">
+                    <i class="fas fa-chalkboard"></i> 
+                    <span>Gestão Pedagógica</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <ul class="submenu">
+                    <li data-tab="classes">
+                        <a href="classes.html">
+                            <i class="fas fa-users"></i> 
+                            <span>Turmas</span>
+                        </a>
+                    </li>
+                    <li data-tab="schedule">
+                        <a href="schedule.html">
+                            <i class="fas fa-calendar-alt"></i> 
+                            <span>Horários</span>
+                        </a>
+                    </li>
+                    <li data-tab="tests">
+                        <a href="tests.html">
+                            <i class="fas fa-file-alt"></i> 
+                            <span>Provas</span>
+                        </a>
+                    </li>
+                    <li data-tab="bulletins">
+                        <a href="bulletins.html">
+                            <i class="fas fa-file-invoice"></i> 
+                            <span>Boletins</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <!-- Gestão de Professores -->
+            <li class="has-submenu" data-tab="staff-management">
+                <div class="menu-item">
+                    <i class="fas fa-chalkboard-teacher"></i> 
+                    <span>Gestão de Professores</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <ul class="submenu">
+                    <li data-tab="register-teachers">
+                        <a href="teachers.html">
+                            <i class="fas fa-user-plus"></i> 
+                            <span>Professores</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <!-- Utilizadores -->
+            <li class="has-submenu" data-tab="users">
+                <div class="menu-item">
+                    <i class="fas fa-users"></i> 
+                    <span>Utilizadores</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <ul class="submenu">
+                    <li data-tab="guardians">
+                        <a href="guardians.html">
+                            <i class="fas fa-user-friends"></i> 
+                            <span>Encarregados</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <!-- Comunicação -->
+            <li class="has-submenu" data-tab="communication">
+                <div class="menu-item">
+                    <i class="fas fa-comments"></i> 
+                    <span>Comunicação</span>
+                    <i class="fas fa-chevron-down arrow"></i>
+                </div>
+                <ul class="submenu">
+                    <li data-tab="messages">
+                        <a href="messages.html">
+                            <i class="fas fa-envelope"></i> 
+                            <span>Mensagens</span>
+                        </a>
+                    </li>
+                    <li data-tab="notice-board">
+                        <a href="notices.html">
+                            <i class="fas fa-bullhorn"></i> 
+                            <span>Quadro de Avisos</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            
+            <!-- Configurações -->
+            <li data-tab="settings">
+                <a href="settings.html">
+                    <i class="fas fa-cog"></i> 
+                    <span>Configurações</span>
+                </a>
+            </li>
+        </ul>
+          <div class="logout">
+              <i class="fas fa-sign-out-alt"></i> 
+              <span>Sair</span>
+          </div>
+      </nav>
+      
+      <main class="content">
+          <header>
+              <div class="search-bar">
+                  <i class="fas fa-search"></i>
+                  <input type="text" placeholder="Pesquisar...">
+              </div>
+              <div class="user-info">
+                  <div class="notifications">
+                      <i class="fas fa-bell"></i>
+                      <span class="badge">3</span>
+                  </div>
+                  <div class="user">
+                      <img src="images/semfoto.jpeg" alt="Admin User">
+                      <span>Coordenador</span>
+                  </div>
+              </div>
+          </header>
+          
+          <div class="tab-content">
+              <!-- Gestão De Alunos - Cadastrar Estudantes -->
+              <div class="tab-pane active" id="register-students">
+                  <div class="section-header">
+                      <h2>Estudantes</h2>
+                     
+                  </div>
+                  
+                  <div class="filter-controls">
+                      <div class="search-filter">
+                          <input type="text" id="student-search" placeholder="Pesquisar alunos...">
+                      </div>
+                      <div class="dropdown-filter">
+                          <select id="class-filter">
+                              <option value="">Todas as Turmas</option>
+                              <option value="class-10A">Turma 10ª A Informática</option>
+                              <option value="class-10B">Turma 10ª B Informática</option>
+                              <option value="class-11">Turma 11ª Infomática</option>
+                              <option value="class-12">Turma 12ª Informática</option>
+                              <option value="class-13">Turma 13ª Informática</option>
+                          </select>
+                      </div>
+                  </div>
+                  
+                  <div class="table-container">
+                      <table class="data-table">
+                          <thead>
+                              <tr>
+                                  <th>ID</th>
+                                  <th>Nome</th>
+                                  <th>Turma</th>
+                                  <th>Gênero</th>
+                                  <th>Contato</th>
+                                  <th>Presença</th>
+                                  <th>Ações</th>
+                              </tr>
+                          </thead>
+                          <tbody id="student-table-body">
+                              <tr>
+                                  <td>STU001</td>
+                                  <td>João Silva</td>
+                                  <td>Turma 10ª A Informática</td>
+                                  <td>Masculino</td>
+                                  <td>+244 923 456 789</td>
+                                  <td><span class="status-badge present">90%</span></td>
+                                  <td>
+                                      <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
+                                      <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
+                                      <button class="action-btn delete" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>STU002</td>
+                                  <td>Maria Santos</td>
+                                  <td>Turma 10ª A Informática</td>
+                                  <td>Feminino</td>
+                                  <td>+244 923 456 790</td>
+                                  <td><span class="status-badge present">95%</span></td>
+                                  <td>
+                                      <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
+                                      <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
+                                      <button class="action-btn delete" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>STU003</td>
+                                  <td>Pedro Oliveira</td>
+                                  <td>Turma 10ª B Informática</td>
+                                  <td>Masculino</td>
+                                  <td>+244 923 456 791</td>
+                                  <td><span class="status-badge absent">85%</span></td>
+                                  <td>
+                                      <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
+                                      <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
+                                      <button class="action-btn delete" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>STU004</td>
+                                  <td>Ana Costa</td>
+                                  <td>Turma 10ª A Informática</td>
+                                  <td>Feminino</td>
+                                  <td>+244 923 456 792</td>
+                                  <td><span class="status-badge late">92%</span></td>
+                                  <td>
+                                      <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
+                                      <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
+                                      <button class="action-btn delete" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td>STU005</td>
+                                  <td>Carlos Ferreira</td>
+                                  <td>Turma 11ª Informática</td>
+                                  <td>Masculino</td>
+                                  <td>+244 923 456 793</td>
+                                  <td><span class="status-badge present">88%</span></td>
+                                  <td>
+                                      <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
+                                      <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
+                                      <button class="action-btn delete" title="Eliminar"><i class="fas fa-trash"></i></button>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                  
+                  <div class="pagination">
+                      <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
+                      <button class="pagination-btn active">1</button>
+                      <button class="pagination-btn">2</button>
+                      <button class="pagination-btn">3</button>
+                      <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
+                  </div>
+              </div>
+          </div>
+      </main>
+  </div>
+  
+<!-- Modal para adicionar/editar alunos - Optimized -->
+<div class="modal" id="student-modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="student-modal-title">Adicionar Novo Aluno</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="student-form">
+                <!-- Informações Pessoais -->
+                <fieldset>
+                    <legend>Informações Pessoais</legend>
+                    <div class="form-group">
+                        <label for="student-name">Nome Completo <span class="required">*</span></label>
+                        <input type="text" id="student-name" placeholder="Nome completo do aluno" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="student-gender">Gênero <span class="required">*</span></label>
+                            <select id="student-gender" required>
+                                <option value="">Selecionar Gênero</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Feminino">Feminino</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="student-dob">Data de Nascimento <span class="required">*</span></label>
+                            <input type="date" id="student-dob" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Bilhete de Identidade (BI) -->
+                    <div class="form-group">
+                        <label for="bi-number">Número do Bilhete de Identidade (BI) <span class="required">*</span></label>
+                        <input type="text" id="bi-number" placeholder="Ex: 000000000LA000" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Cópia do BI (Frente e Verso) <span class="required">*</span></label>
+                        <div class="file-upload-container">
+                            <div class="file-upload">
+                                <label for="bi-front">
+                                    <div class="upload-area">
+                                        <i class="fas fa-upload"></i>
+                                        <span>Frente do BI</span>
+                                        <small>Clique para selecionar</small>
+                                    </div>
+                                </label>
+                                <input type="file" id="bi-front" accept="image/*" required>
+                                <div class="file-preview" id="bi-front-preview"></div>
+                            </div>
+                            <div class="file-upload">
+                                <label for="bi-back">
+                                    <div class="upload-area">
+                                        <i class="fas fa-upload"></i>
+                                        <span>Verso do BI</span>
+                                        <small>Clique para selecionar</small>
+                                    </div>
+                                </label>
+                                <input type="file" id="bi-back" accept="image/*" required>
+                                <div class="file-preview" id="bi-back-preview"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="student-address">Endereço <span class="required">*</span></label>
+                        <textarea id="student-address" rows="2" placeholder="Endereço completo do aluno" required></textarea>
+                    </div>
+                </fieldset>
+
+                <!-- Informações Acadêmicas -->
+                <fieldset>
+                    <legend>Informações Acadêmicas</legend>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="student-class">Turma <span class="required">*</span></label>
+                            <select id="student-class" required>
+                                <option value="">Selecionar Turma</option>
+                                <option value="Turma 10ª A Informática">Turma 10ª A Informática</option>
+                                <option value="Turma 10ª B Informática">Turma 10ª B Informática</option>
+                                <option value="Turma 11ª Informática">Turma 11ª Informática</option>
+                                <option value="Turma 12ª Informática">Turma 12ª Informática</option>
+                                <option value="Turma 13ª Informática">Turma 13ª Informática</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="previous-school">Escola Anterior</label>
+                            <input type="text" id="previous-school" placeholder="Ex: Colégio Pitruca">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <!-- Informações de Contato -->
+                <fieldset>
+                    <legend>Informações de Contato</legend>
+                    <div class="form-group">
+                        <label for="student-contact">Número de Contato <span class="required">*</span></label>
+                        <div class="phone-input-container">
+                            <select id="country-code" class="country-code">
+                                <option value="+244">+244</option>
+                                <option value="+351">+351</option>
+                                <option value="+55">+55</option>
+                                <option value="+1">+1</option>
+                                <option value="+34">+34</option>
+                                <option value="+258">+258</option>
+                                <option value="+240">+240</option>
+                                <option value="+239">+239</option>
+                                <option value="+238">+238</option>
+                                <option value="+245">+245</option>
+                                <option value="+27">+27</option>
+                                <option value="+33">+33</option>
+                                <option value="+44">+44</option>
+                                <option value="+49">+49</option>
+                                <option value="+86">+86</option>
+                            </select>
+                            <input type="tel" id="student-contact" placeholder="XXX XXX XXX" required>
+                        </div>
+                        <small class="form-hint">Formato: XXX XXX XXX (sem espaços ou traços)</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="student-email">Email <span class="required">*</span></label>
+                        <input type="email" id="student-email" placeholder="exemplo@email.com" required>
+                    </div>
+                </fieldset>
+
+                <!-- Encarregado de Educação -->
+                <fieldset>
+                    <legend>Encarregado de Educação</legend>
+                    <div class="form-group">
+                        <label for="parents">Selecionar Encarregado</label>
+                        <select id="parents" name="parents" onchange="setSelectedParent(this.value)">
+                            <option value="">Selecione um encarregado</option>
+                            <option value="1">João Silva (Pai)</option>
+                            <option value="2">Maria Oliveira (Mãe)</option>
+                            <option value="3">António Santos (Tio)</option>
+                        </select>
+                        <small class="form-hint">Selecione um encarregado existente ou adicione um novo</small>
+                    </div>
+                    <div class="form-actions form-row">
+                        <button type="button" class="secondary-btn" id="add-parent-btn">
+                            <i class="fas fa-plus"></i> Adicionar Novo Encarregado
+                        </button>
+                    </div>
+                </fieldset>
+
+                <!-- Credenciais de Acesso -->
+                <fieldset>
+                    <legend>Credenciais de Acesso</legend>
+                    <div class="form-group password-field">
+                        <label for="password">Palavra-Passe <span class="required">*</span></label>
+                        <div class="password-input-container">
+                            <input type="password" id="password" placeholder="Mínimo 6 caracteres" minlength="6" required>
+                            <button type="button" class="password-toggle" tabindex="-1">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                        <small class="form-hint">A senha deve ter pelo menos 6 caracteres</small>
+                    </div>
+                </fieldset>
+
+                <div class="form-actions">
+                    <button type="button" class="cancel-btn">Cancelar</button>
+                    <button type="submit" class="save-btn">Salvar Aluno</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+  
+  <script src="js/script.js"></script>
+</body>
+</html>
+
