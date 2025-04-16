@@ -4,15 +4,16 @@ session_start();
 if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
 ?>
 
-
 <!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistema - Pitruca Camama</title>
+  <title>Mensagens - Pitruca Camama</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/messages.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <style>
     .user-dropdown {
       position: relative;
@@ -59,7 +60,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
           </div>
           <ul class="nav-links">
               <!-- Painel (Visão Geral) -->
-              <li class="active" data-tab="dashboard">
+              <li data-tab="dashboard">
                   <a href="index.php">
                       <i class="fas fa-tachometer-alt"></i> 
                       <span>Painel</span>
@@ -159,14 +160,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
               </li>
               
               <!-- Comunicação -->
-              <li class="has-submenu" data-tab="communication">
+              <li class="has-submenu active" data-tab="communication">
                   <div class="menu-item">
                       <i class="fas fa-comments"></i> 
                       <span>Comunicação</span>
                       <i class="fas fa-chevron-down arrow"></i>
                   </div>
-                  <ul class="submenu">
-                      <li data-tab="messages">
+                  <ul class="submenu show">
+                      <li class="active" data-tab="messages">
                           <a href="messages.php">
                               <i class="fas fa-envelope"></i> 
                               <span>Mensagens</span>
@@ -206,125 +207,164 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                   </a>
               </li>
           </ul>
-          <!-- Removed the logout div from here -->
       </nav>
       
       <main class="content">
           <header>
               <div class="search-bar">
                   <i class="fas fa-search"></i>
-                  <input type="text" placeholder="Pesquisar...">
+                  <input type="text" placeholder="Pesquisar mensagens...">
               </div>
               <div class="user-info">
                   <div class="user user-dropdown">
-                        <img src="login\images\semft-removebg-preview.png" alt="" class="userOptions__avatar img-circle" width="42" height="42">
+                        <img src="login/images/semft-removebg-preview.png" alt="" class="userOptions__avatar img-circle" width="42" height="42">
                         <span><?php echo $_SESSION['fname']; ?></span>
 
                         <div class="dropdown-menu">
                         <a href="/dashboardpitruca_copia/login/logout.php" class="dropdown-item">
                             <i class="fas fa-sign-out-alt"></i> Sair
                         </a>
-
                         </div>
                   </div>
               </div>
           </header>
           
           <div class="tab-content">
-              <!-- Painel (Visão Geral) -->
-              <div class="tab-pane active" id="dashboard">
-                  <h2>Painel (Visão Geral)</h2><br>
-                  <div class="stats-container">
-                      <div class="stat-card">
-                          <div class="stat-icon student-icon">
-                              <i class="fas fa-user-graduate"></i>
+              <div class="tab-pane active" id="messages">
+                  <h2>Sistema de Mensagens</h2>
+                  
+                  <div class="messages-container">
+                      <div class="messages-sidebar">
+                          <div class="messages-actions">
+                              <button class="btn-compose"><i class="fas fa-plus"></i> Nova Mensagem</button>
+                              <div class="messages-filters">
+                                  <button class="filter-btn active" data-filter="inbox"><i class="fas fa-inbox"></i> Caixa de Entrada</button>
+                                  <button class="filter-btn" data-filter="sent"><i class="fas fa-paper-plane"></i> Enviados</button>
+                                  <button class="filter-btn" data-filter="draft"><i class="fas fa-save"></i> Rascunhos</button>
+                                  <button class="filter-btn" data-filter="trash"><i class="fas fa-trash"></i> Lixeira</button>
+                              </div>
                           </div>
-                          <div class="stat-info">
-                              <h3>Total de Alunos</h3>
-                              <p>1,250</p>
+                          
+                          <div class="messages-list">
+                              <div class="message-item unread" data-id="1">
+                                  <div class="message-sender">
+                                      <img src="login/images/semft-removebg-preview.png" alt="Avatar" class="sender-avatar">
+                                      <div class="sender-info">
+                                          <h4>Maria Oliveira</h4>
+                                          <span class="message-time">10:30 AM</span>
+                                      </div>
+                                  </div>
+                                  <div class="message-preview">
+                                      <h5>Reunião de Pais</h5>
+                                      <p>Prezado coordenador, gostaria de confirmar a data da próxima reunião de pais...</p>
+                                  </div>
+                              </div>
+                              
+                              <div class="message-item" data-id="2">
+                                  <div class="message-sender">
+                                      <img src="login/images/semft-removebg-preview.png" alt="Avatar" class="sender-avatar">
+                                      <div class="sender-info">
+                                          <h4>João Santos</h4>
+                                          <span class="message-time">Ontem</span>
+                                      </div>
+                                  </div>
+                                  <div class="message-preview">
+                                      <h5>Material Didático</h5>
+                                      <p>Solicito informações sobre o novo material didático para o próximo semestre...</p>
+                                  </div>
+                              </div>
+                              
+                              <div class="message-item" data-id="3">
+                                  <div class="message-sender">
+                                      <img src="login/images/semft-removebg-preview.png" alt="Avatar" class="sender-avatar">
+                                      <div class="sender-info">
+                                          <h4>Ana Silva</h4>
+                                          <span class="message-time">23 Ago</span>
+                                      </div>
+                                  </div>
+                                  <div class="message-preview">
+                                      <h5>Dúvida sobre avaliação</h5>
+                                      <p>Bom dia, gostaria de esclarecer algumas dúvidas sobre o sistema de avaliação...</p>
+                                  </div>
+                              </div>
+                              
+                              <div class="message-item" data-id="4">
+                                  <div class="message-sender">
+                                      <img src="login/images/semft-removebg-preview.png" alt="Avatar" class="sender-avatar">
+                                      <div class="sender-info">
+                                          <h4>Carlos Mendes</h4>
+                                          <span class="message-time">20 Ago</span>
+                                      </div>
+                                  </div>
+                                  <div class="message-preview">
+                                      <h5>Solicitação de reunião</h5>
+                                      <p>Prezado diretor, solicito uma reunião para discutir o desempenho do meu filho...</p>
+                                  </div>
+                              </div>
                           </div>
                       </div>
-                      <div class="stat-card">
-                          <div class="stat-icon teacher-icon">
-                              <i class="fas fa-chalkboard-teacher"></i>
+                      
+                      <div class="message-detail">
+                          <div class="message-header">
+                              <div class="message-subject">
+                                  <h3>Reunião de Pais</h3>
+                                  <div class="message-meta">
+                                      <span class="sender-name">De: Maria Oliveira</span>
+                                      <span class="message-date">Hoje, 10:30 AM</span>
+                                  </div>
+                              </div>
+                              <div class="message-actions">
+                                  <button class="action-btn" title="Responder"><i class="fas fa-reply"></i></button>
+                                  <button class="action-btn" title="Encaminhar"><i class="fas fa-share"></i></button>
+                                  <button class="action-btn" title="Excluir"><i class="fas fa-trash"></i></button>
+                              </div>
                           </div>
-                          <div class="stat-info">
-                              <h3>Total de Professores</h3>
-                              <p>75</p>
+                          
+                          <div class="message-body">
+                              <p>Prezado coordenador,</p>
+                              <p>Gostaria de confirmar a data da próxima reunião de pais e mestres. No último comunicado, foi mencionado que seria no dia 15 de setembro, mas não foi especificado o horário.</p>
+                              <p>Também gostaria de saber se haverá uma pauta específica para esta reunião ou se será uma discussão geral sobre o desempenho dos alunos.</p>
+                              <p>Agradeço antecipadamente pela atenção.</p>
+                              <p>Atenciosamente,<br>Maria Oliveira<br>Mãe do aluno Pedro Oliveira - 5º ano B</p>
                           </div>
-                      </div>
-                      <div class="stat-card">
-                          <div class="stat-icon course-icon">
-                              <i class="fas fa-book"></i>
-                          </div>
-                          <div class="stat-info">
-                              <h3>Total de Turmas</h3>
-                              <p>42</p>
+                          
+                          <div class="message-reply">
+                              <textarea placeholder="Escreva sua resposta aqui..."></textarea>
+                              <div class="reply-actions">
+                                  <button class="btn-send"><i class="fas fa-paper-plane"></i> Enviar</button>
+                                  <button class="btn-attach"><i class="fas fa-paperclip"></i></button>
+                              </div>
                           </div>
                       </div>
                   </div>
                   
-                  <div class="charts-container">
-                      <div class="chart">
-                          <h3>Visão Geral de Presença</h3>
-                          <div class="chart-placeholder">
-                              <div class="bar" style="height: 70%;" data-value="70%">
-                                  <span>Seg</span>
-                              </div>
-                              <div class="bar" style="height: 85%;" data-value="85%">
-                                  <span>Ter</span>
-                              </div>
-                              <div class="bar" style="height: 75%;" data-value="75%">
-                                  <span>Qua</span>
-                              </div>
-                              <div class="bar" style="height: 90%;" data-value="90%">
-                                  <span>Qui</span>
-                              </div>
-                              <div class="bar" style="height: 65%;" data-value="65%">
-                                  <span>Sex</span>
-                              </div>
+                  <!-- Modal para nova mensagem -->
+                  <div class="compose-modal" id="composeModal">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h3>Nova Mensagem</h3>
+                              <button class="close-modal"><i class="fas fa-times"></i></button>
                           </div>
-                      </div>
-                   
-                  
-                  <div class="recent-activity">
-                      <h3>Atividade Recente</h3>
-                      <div class="activity-list">
-                          <div class="activity-item">
-                              <div class="activity-icon">
-                                  <i class="fas fa-user-plus"></i>
-                              </div>
-                              <div class="activity-details">
-                                  <p>Novo aluno <strong>João Silva</strong> registrado</p>
-                                  <span class="time">2 horas atrás</span>
-                              </div>
-                          </div>
-                          <div class="activity-item">
-                              <div class="activity-icon">
-                                  <i class="fas fa-file-alt"></i>
-                              </div>
-                              <div class="activity-details">
-                                  <p>Professor <strong>Maria Santos</strong> carregou novos materiais do curso</p>
-                                  <span class="time">4 horas atrás</span>
-                              </div>
-                          </div>
-                          <div class="activity-item">
-                              <div class="activity-icon">
-                                  <i class="fas fa-calendar-check"></i>
-                              </div>
-                              <div class="activity-details">
-                                  <p>Presença para <strong>Turma 10B</strong> foi atualizada</p>
-                                  <span class="time">Ontem</span>
-                              </div>
-                          </div>
-                          <div class="activity-item">
-                              <div class="activity-icon">
-                                  <i class="fas fa-graduation-cap"></i>
-                              </div>
-                              <div class="activity-details">
-                                  <p>Cronograma de exame final para <strong>Semestre de Primavera</strong> publicado</p>
-                                  <span class="time">2 dias atrás</span>
-                              </div>
+                          <div class="modal-body">
+                              <form id="composeForm">
+                                  <div class="form-group">
+                                      <label for="recipient">Para:</label>
+                                      <input type="text" id="recipient" placeholder="Digite o nome ou selecione o destinatário">
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="subject">Assunto:</label>
+                                      <input type="text" id="subject" placeholder="Assunto da mensagem">
+                                  </div>
+                                  <div class="form-group">
+                                      <label for="message">Mensagem:</label>
+                                      <textarea id="message" rows="10" placeholder="Escreva sua mensagem aqui..."></textarea>
+                                  </div>
+                                  <div class="form-actions">
+                                      <button type="button" class="btn-attach"><i class="fas fa-paperclip"></i> Anexar</button>
+                                      <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> Enviar</button>
+                                      <button type="button" class="btn-save"><i class="fas fa-save"></i> Salvar Rascunho</button>
+                                  </div>
+                              </form>
                           </div>
                       </div>
                   </div>
@@ -332,7 +372,6 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
           </div>
       </main>
   </div>
-  
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       // Get the user dropdown element
@@ -356,11 +395,11 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
   </script>
   
   <script src="js/script.js"></script>
+  <script src="js/messages.js"></script>
 </body>
 </html>
 
-<?php }else{
+<?php } else {
     header("Location: ../login.php");
     exit;
 } ?>
-

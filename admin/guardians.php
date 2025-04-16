@@ -14,6 +14,55 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        .alert {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px 20px;
+    border-radius: 4px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-width: 300px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 10000;
+    animation: slideIn 0.3s ease-out;
+    transition: opacity 0.3s;
+}
+
+.alert-success {
+    background-color: #28a745;
+}
+
+.alert-error {
+    background-color: #dc3545;
+}
+
+.close-alert {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    margin-left: 15px;
+}
+
+.fade-out {
+    opacity: 0;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
     .user-dropdown {
       position: relative;
       cursor: pointer;
@@ -72,7 +121,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                       <span>Gestão De Alunos</span>
                       <i class="fas fa-chevron-down arrow"></i>
                   </div>
-                  <ul class="submenu show">
+                  <ul class="submenu">
                       <li data-tab="register-students">
                           <a href="students.php">
                               <i class="fas fa-user-plus"></i> 
@@ -141,8 +190,8 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
               </li>
               
               <!-- Utilizadores -->
-              <li class="has-submenu active" data-tab="student-management">
-              <li class="has-submenu" data-tab="users">
+              <li class="has-submenu" data-tab="student-management">
+              <li class="has-submenu active" data-tab="users">
                   <div class="menu-item">
                       <i class="fas fa-users"></i> 
                       <span>Utilizadores</span>
@@ -268,8 +317,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
             </div>
         </main>
     </div>
-
-    <!-- Modal para adicionar/editar professores - Optimized -->
+<!-- Modal para adicionar/editar encarregados -->
 <div class="modal" id="guardian-modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -278,12 +326,14 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
         </div>
         <div class="modal-body">
             <form id="guardian-form">
+                <input type="hidden" id="guardian-id">
+                
                 <!-- Informações Pessoais -->
                 <fieldset>
                     <legend>Informações Pessoais</legend>
                     <div class="form-group">
                         <label for="guardian-name">Nome Completo <span class="required">*</span></label>
-                        <input type="text" id="guardian-name" placeholder="Nome completo do aluno" required>
+                        <input type="text" id="guardian-name" placeholder="Nome completo do encarregado" required>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
@@ -296,80 +346,22 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="guardian-dob">Data de Nascimento <span class="required">*</span></label>
-                            <input type="date" id="guardian-dob" required>
-                        </div>
-                    </div>
-                    
-                    <!-- Bilhete de Identidade (BI) -->
-                    <div class="form-group">
-                        <label for="bi-number">Número do Bilhete de Identidade (BI) <span class="required">*</span></label>
-                        <input type="text" id="bi-number" placeholder="Ex: 0000000LA000" required>
-                        <small class="form-hint">Formato: 7 números + 2 letras + 3 números (Ex: 0000000LA000)</small>
-                    </div>
-                    <div class="form-group">
-                        <label>Cópia do BI (Frente e Verso) <span class="required">*</span></label>
-                        <div class="file-upload-container">
-                            <div class="file-upload">
-                                <label for="bi-front">
-                                    <div class="upload-area">
-                                        <i class="fas fa-upload"></i>
-                                        <span>Frente do BI</span>
-                                        <small>Clique para selecionar</small>
-                                    </div>
-                                </label>
-                                <input type="file" id="bi-front" accept="image/*" required>
-                                <div class="file-preview" id="bi-front-preview"></div>
-                            </div>
-                            <div class="file-upload">
-                                <label for="bi-back">
-                                    <div class="upload-area">
-                                        <i class="fas fa-upload"></i>
-                                        <span>Verso do BI</span>
-                                        <small>Clique para selecionar</small>
-                                    </div>
-                                </label>
-                                <input type="file" id="bi-back" accept="image/*" required>
-                                <div class="file-preview" id="bi-back-preview"></div>
-                            </div>
+                            <label for="guardian-dob">Data de Nascimento</label>
+                            <input type="date" id="guardian-dob">
                         </div>
                     </div>
                     
                     <div class="form-group">
-                        <label for="guardian-address">Endereço <span class="required">*</span></label>
-                        <textarea id="guardian-address" rows="2" placeholder="Endereço completo do aluno" required></textarea>
+                        <label for="bi-number">Número do Bilhete de Identidade (BI)</label>
+                        <input type="text" id="bi-number" placeholder="Ex: 0000000LA000">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="guardian-address">Endereço</label>
+                        <textarea id="guardian-address" rows="2" placeholder="Endereço completo"></textarea>
                     </div>
                 </fieldset>
-  
-                <!-- Informações Acadêmicas -->
-                <fieldset>
-                    <legend>Informações Acadêmicas</legend>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="guardian-class">Turma <span class="required">*</span></label>
-                            <select id="guardian-class" required>
-                                <option value="">Selecionar Turma</option>
-                                <option value="Turma 10ª A Informática">Turma 10ª A Informática</option>
-                                <option value="Turma 10ª B Informática">Turma 10ª B Informática</option>
-                                <option value="Turma 11ª Informática">Turma 11ª Informática</option>
-                                <option value="Turma 12ª Informática">Turma 12ª Informática</option>
-                                <option value="Turma 13ª Informática">Turma 13ª Informática</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="guardian-class">Disciplinas <span class="required">*</span></label>
-                            <select id="guardian-class" required>
-                                <option value="">Selecionar Disciplinas</option>
-                                <option value="LP">Língua Portuguesa</option>
-                                <option value="Mat">Matemática</option>
-                                <option value="Fis">Física</option>
-                                <option value="TLP">Técnina de Linguagem de Programação</option>
-                                <option value="TIC">Tecnologia de Informação e Comunicação</option>
-                            </select>
-                        </div>
-                    </div>
-                </fieldset>
-  
+
                 <!-- Informações de Contato -->
                 <fieldset>
                     <legend>Informações de Contato</legend>
@@ -379,76 +371,28 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                             <select id="country-code" class="country-code">
                                 <option value="+244">+244 (Angola)</option>
                                 <option value="+351">+351 (Portugal)</option>
-                                <option value="+55">+55 (Brasil)</option>
-                                <option value="+1">+1 (EUA/Canadá)</option>
-                                <option value="+34">+34 (Espanha)</option>
-                                <option value="+258">+258 (Moçambique)</option>
-                                <option value="+240">+240 (Guiné Equatorial)</option>
-                                <option value="+239">+239 (São Tomé e Príncipe)</option>
-                                <option value="+238">+238 (Cabo Verde)</option>
-                                <option value="+245">+245 (Guiné-Bissau)</option>
-                                <option value="+27">+27 (África do Sul)</option>
-                                <option value="+33">+33 (França)</option>
-                                <option value="+44">+44 (Reino Unido)</option>
-                                <option value="+49">+49 (Alemanha)</option>
-                                <option value="+86">+86 (China)</option>
+                                <!-- Outros códigos... -->
                             </select>
                             <input type="tel" id="guardian-contact" placeholder="XXX XXX XXX" required>
                         </div>
-                        <small class="form-hint">Formato: XXX XXX XXX (sem espaços ou traços)</small>
                     </div>
                     <div class="form-group">
-                        <label for="guardian-email">Email <span class="required">*</span></label>
-                        <input type="email" id="guardian-email" placeholder="exemplo@email.com" required>
+                        <label for="guardian-email">Email</label>
+                        <input type="email" id="guardian-email" placeholder="exemplo@email.com">
                     </div>
                 </fieldset>
-                <!-- Credenciais de Acesso -->
-                <fieldset>
-                    <legend>Credenciais de Acesso</legend>
-                    <div class="form-group password-field">
-                        <label for="password">Palavra-Passe <span class="required">*</span></label>
-                        <div class="password-input-container">
-                            <input type="password" id="password" placeholder="Mínimo 8 caracteres" minlength="8" required>
-                            <button type="button" class="password-toggle" tabindex="-1">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                        </div>
-                        <small class="form-hint">A senha deve ter pelo menos 8 caracteres, incluindo letras maiúsculas, minúsculas, números e símbolos</small>
-                    </div>
-                </fieldset>
-  
+
                 <div class="form-actions">
                     <button type="button" class="cancel-btn" id="cancel-guardian-btn">Cancelar</button>
-                    <button type="submit" class="save-btn">Salvar Professor</button>
+                    <button type="submit" class="save-btn">Salvar Encarregado</button>
                 </div>
             </form>
         </div>
     </div>
-  </div>
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      // Get the user dropdown element
-      const userDropdown = document.querySelector('.user-dropdown');
-      const dropdownMenu = document.querySelector('.dropdown-menu');
-      
-      // Toggle dropdown when username is clicked
-      userDropdown.addEventListener('click', function() {
-        dropdownMenu.classList.toggle('show');
-      });
-      
-      // Close dropdown when clicking outside
-      document.addEventListener('click', function(event) {
-        if (!userDropdown.contains(event.target)) {
-          dropdownMenu.classList.remove('show');
-        }
-      });
-      
-      // No special automatic display - dropdown only shows when clicked
-    });
-  </script>
-  
+</div>
+
     
+    <script src="js/guardians.js"></script>
     <script src="js/script.js"></script>
 </body>
 </html>

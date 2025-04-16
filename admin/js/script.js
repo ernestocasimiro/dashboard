@@ -2384,3 +2384,1765 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 })
+
+// Dados simulados de alunos cadastrados no sistema
+const registeredStudents = [
+  { id: 1, name: "Ana Silva", grade: "10" },
+  { id: 2, name: "Bruno Ferreira", grade: "10" },
+  { id: 3, name: "Carla Oliveira", grade: "10" },
+  { id: 4, name: "Daniel Santos", grade: "10" },
+  { id: 5, name: "Eduardo Costa", grade: "10" },
+  { id: 6, name: "Fátima Pereira", grade: "10" },
+  { id: 7, name: "Gabriel Martins", grade: "11" },
+  { id: 8, name: "Helena Rodrigues", grade: "11" },
+  { id: 9, name: "Igor Almeida", grade: "11" },
+  { id: 10, name: "Joana Cardoso", grade: "11" },
+  { id: 11, name: "Luís Ribeiro", grade: "11" },
+  { id: 12, name: "Mariana Gomes", grade: "12" },
+  { id: 13, name: "Nuno Fernandes", grade: "12" },
+  { id: 14, name: "Olívia Pinto", grade: "12" },
+  { id: 15, name: "Paulo Sousa", grade: "12" },
+  { id: 16, name: "Quitéria Lopes", grade: "12" },
+  { id: 17, name: "Ricardo Neves", grade: "13" },
+  { id: 18, name: "Sofia Marques", grade: "13" },
+  { id: 19, name: "Tiago Correia", grade: "13" },
+  { id: 20, name: "Úrsula Dias", grade: "13" },
+  { id: 21, name: "Vítor Moreira", grade: "13" },
+  { id: 22, name: "Xana Teixeira", grade: "10" },
+  { id: 23, name: "Yara Campos", grade: "11" },
+  { id: 24, name: "Zé Carlos", grade: "12" },
+  { id: 25, name: "André Mota", grade: "13" },
+  { id: 26, name: "Beatriz Lima", grade: "10" },
+  { id: 27, name: "Carlos Duarte", grade: "11" },
+  { id: 28, name: "Diana Fonseca", grade: "12" },
+  { id: 29, name: "Elisa Machado", grade: "13" },
+  { id: 30, name: "Fernando Castro", grade: "10" }
+];
+
+// Dados simulados de turmas
+let classes = [
+  { id: "CLS001", name: "Turma 10ª A Informática", grade: "10", director: "Maria Santos", directorId: "1", students: 22, capacity: 25, studentList: [] },
+  { id: "CLS002", name: "Turma 10ª B Informática", grade: "10", director: "João Oliveira", directorId: "2", students: 18, capacity: 25, studentList: [] },
+  { id: "CLS003", name: "Turma 11ª Informática", grade: "11", director: "Ana Costa", directorId: "3", students: 25, capacity: 25, studentList: [] },
+  { id: "CLS004", name: "Turma 12ª Informática", grade: "12", director: "Carlos Ferreira", directorId: "4", students: 20, capacity: 25, studentList: [] },
+  { id: "CLS005", name: "Turma 13ª Informática", grade: "13", director: "Pedro Silva", directorId: "5", students: 15, capacity: 25, studentList: [] }
+];
+
+// Elementos DOM
+const addClassBtn = document.getElementById('add-class-btn');
+const classModal = document.getElementById('class-modal');
+const closeModal = document.querySelector('.close-modal');
+const cancelBtn = document.querySelector('.cancel-btn');
+const classForm = document.getElementById('class-form');
+const classTableBody = document.getElementById('class-table-body');
+const classSearch = document.getElementById('class-search');
+const gradeFilter = document.getElementById('grade-filter');
+const classFilter = document.getElementById('class-filter');
+const classModalTitle = document.getElementById('class-modal-title');
+
+// Variáveis de estado
+let isEditing = false;
+let currentClassId = null;
+let selectedStudents = [];
+
+// Modificar o modal para incluir a seleção de alunos
+function updateModalForStudentSelection() {
+  const modalBody = document.querySelector('.modal-body');
+  
+  // Verificar se a seção de alunos já existe
+  if (!document.getElementById('student-selection-section')) {
+      // Criar seção de seleção de alunos
+      const studentSection = document.createElement('div');
+      studentSection.id = 'student-selection-section';
+      studentSection.innerHTML = `
+          <h4>Adicionar Alunos à Turma</h4>
+          <div class="form-group">
+              <div class="student-filter">
+                  <label for="student-grade-filter">Filtrar por Ano:</label>
+                  <select id="student-grade-filter">
+                      <option value="">Todos os Anos</option>
+                      <option value="10">10º Ano</option>
+                      <option value="11">11º Ano</option>
+                      <option value="12">12º Ano</option>
+                      <option value="13">13º Ano</option>
+                  </select>
+              </div>
+              <div class="student-search">
+                  <label for="student-search-input">Pesquisar Alunos:</label>
+                  <input type="text" id="student-search-input" placeholder="Nome do aluno...">
+              </div>
+          </div>
+          <div class="student-list-container">
+              <div class="student-count-info">
+                  <span id="selected-count">0</span> alunos selecionados de <span id="max-students">25</span>
+              </div>
+              <div class="student-list" id="available-students"></div>
+              <div class="selected-students-container">
+                  <h5>Alunos Selecionados</h5>
+                  <div class="selected-students-list" id="selected-students-list"></div>
+              </div>
+          </div>
+      `;
+      
+      // Inserir antes dos botões de ação
+      const formActions = document.querySelector('.form-actions');
+      modalBody.insertBefore(studentSection, formActions);
+      
+      // Adicionar estilos CSS para a seção de alunos
+      const styleElement = document.createElement('style');
+      styleElement.textContent = `
+          .student-list-container {
+              margin-top: 15px;
+              border: 1px solid #ddd;
+              border-radius: 5px;
+              padding: 10px;
+          }
+          .student-count-info {
+              margin-bottom: 10px;
+              font-weight: bold;
+              color: #333;
+          }
+          .student-list {
+              max-height: 200px;
+              overflow-y: auto;
+              border: 1px solid #eee;
+              padding: 10px;
+              margin-bottom: 15px;
+          }
+          .student-item {
+              padding: 8px;
+              border-bottom: 1px solid #eee;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+          }
+          .student-item:hover {
+              background-color: #f9f9f9;
+          }
+          .student-item button {
+              background-color: #4CAF50;
+              color: white;
+              border: none;
+              padding: 5px 10px;
+              border-radius: 3px;
+              cursor: pointer;
+          }
+          .student-item button.remove-btn {
+              background-color: #f44336;
+          }
+          .student-item button:hover {
+              opacity: 0.8;
+          }
+          .student-filter, .student-search {
+              margin-bottom: 10px;
+          }
+          .selected-students-container {
+              margin-top: 15px;
+          }
+          .selected-students-list {
+              max-height: 150px;
+              overflow-y: auto;
+              border: 1px solid #eee;
+              padding: 10px;
+          }
+          .student-grade-filter, .student-search-input {
+              width: 100%;
+              padding: 8px;
+              margin-top: 5px;
+          }
+          .error-message {
+              color: #f44336;
+              font-size: 14px;
+              margin-top: 5px;
+          }
+      `;
+      document.head.appendChild(styleElement);
+  }
+}
+
+// Função para renderizar a lista de alunos disponíveis
+function renderAvailableStudents() {
+  const availableStudentsList = document.getElementById('available-students');
+  const gradeFilter = document.getElementById('student-grade-filter').value;
+  const searchTerm = document.getElementById('student-search-input').value.toLowerCase();
+  
+  // Limpar a lista atual
+  availableStudentsList.innerHTML = '';
+  
+  // Filtrar alunos
+  const filteredStudents = registeredStudents.filter(student => {
+      const matchesGrade = gradeFilter === '' || student.grade === gradeFilter;
+      const matchesSearch = student.name.toLowerCase().includes(searchTerm);
+      const isNotSelected = !selectedStudents.some(s => s.id === student.id);
+      return matchesGrade && matchesSearch && isNotSelected;
+  });
+  
+  // Verificar se já atingiu o limite de alunos
+  const maxReached = selectedStudents.length >= 25;
+  
+  // Renderizar alunos filtrados
+  if (filteredStudents.length === 0) {
+      availableStudentsList.innerHTML = '<p>Nenhum aluno encontrado.</p>';
+  } else {
+      filteredStudents.forEach(student => {
+          const studentItem = document.createElement('div');
+          studentItem.className = 'student-item';
+          studentItem.innerHTML = `
+              <span>${student.name} (${student.grade}º Ano)</span>
+              <button class="add-student-btn" data-id="${student.id}" ${maxReached ? 'disabled' : ''}>
+                  ${maxReached ? 'Limite Atingido' : 'Adicionar'}
+              </button>
+          `;
+          availableStudentsList.appendChild(studentItem);
+      });
+      
+      // Adicionar event listeners para os botões de adicionar
+      document.querySelectorAll('.add-student-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+              const studentId = parseInt(this.getAttribute('data-id'));
+              addStudentToSelection(studentId);
+          });
+      });
+  }
+  
+  // Atualizar contador
+  updateStudentCounter();
+}
+
+// Função para renderizar a lista de alunos selecionados
+function renderSelectedStudents() {
+  const selectedStudentsList = document.getElementById('selected-students-list');
+  
+  // Limpar a lista atual
+  selectedStudentsList.innerHTML = '';
+  
+  // Renderizar alunos selecionados
+  if (selectedStudents.length === 0) {
+      selectedStudentsList.innerHTML = '<p>Nenhum aluno selecionado.</p>';
+  } else {
+      selectedStudents.forEach(student => {
+          const studentItem = document.createElement('div');
+          studentItem.className = 'student-item';
+          studentItem.innerHTML = `
+              <span>${student.name} (${student.grade}º Ano)</span>
+              <button class="remove-student-btn remove-btn" data-id="${student.id}">Remover</button>
+          `;
+          selectedStudentsList.appendChild(studentItem);
+      });
+      
+      // Adicionar event listeners para os botões de remover
+      document.querySelectorAll('.remove-student-btn').forEach(btn => {
+          btn.addEventListener('click', function() {
+              const studentId = parseInt(this.getAttribute('data-id'));
+              removeStudentFromSelection(studentId);
+          });
+      });
+  }
+  
+  // Atualizar contador
+  updateStudentCounter();
+}
+
+// Função para adicionar um aluno à seleção
+function addStudentToSelection(studentId) {
+  // Verificar se já atingiu o limite
+  if (selectedStudents.length >= 25) {
+      alert('Limite de 25 alunos por turma atingido!');
+      return;
+  }
+  
+  // Encontrar o aluno pelo ID
+  const student = registeredStudents.find(s => s.id === studentId);
+  
+  if (student && !selectedStudents.some(s => s.id === studentId)) {
+      selectedStudents.push(student);
+      renderAvailableStudents();
+      renderSelectedStudents();
+  }
+}
+
+// Função para remover um aluno da seleção
+function removeStudentFromSelection(studentId) {
+  selectedStudents = selectedStudents.filter(s => s.id !== studentId);
+  renderAvailableStudents();
+  renderSelectedStudents();
+}
+
+// Função para atualizar o contador de alunos
+function updateStudentCounter() {
+  const selectedCountElement = document.getElementById('selected-count');
+  if (selectedCountElement) {
+      selectedCountElement.textContent = selectedStudents.length;
+  }
+}
+
+// Função para abrir o modal
+function openModal(isEdit = false, classId = null) {
+  isEditing = isEdit;
+  currentClassId = classId;
+  selectedStudents = [];
+  
+  // Atualizar título do modal
+  classModalTitle.textContent = isEditing ? 'Editar Turma' : 'Adicionar Nova Turma';
+  
+  // Limpar formulário
+  classForm.reset();
+  
+  // Se estiver editando, preencher o formulário com os dados da turma
+  if (isEditing && classId) {
+      const classToEdit = classes.find(c => c.id === classId);
+      if (classToEdit) {
+          document.getElementById('class-name').value = classToEdit.name;
+          document.getElementById('class-grade').value = classToEdit.grade;
+          document.getElementById('class-capacity').value = classToEdit.capacity;
+          document.getElementById('class-director').value = classToEdit.directorId;
+          document.getElementById('class-description').value = classToEdit.description || '';
+          
+          // Carregar alunos da turma se houver
+          if (classToEdit.studentList && classToEdit.studentList.length > 0) {
+              selectedStudents = [...classToEdit.studentList];
+          }
+      }
+  }
+  
+  // Atualizar o modal para incluir a seleção de alunos
+  updateModalForStudentSelection();
+  
+  // Renderizar listas de alunos
+  renderAvailableStudents();
+  renderSelectedStudents();
+  
+  // Adicionar event listeners para filtros de alunos
+  document.getElementById('student-grade-filter').addEventListener('change', renderAvailableStudents);
+  document.getElementById('student-search-input').addEventListener('input', renderAvailableStudents);
+  
+  // Exibir o modal
+  classModal.style.display = 'block';
+}
+
+// Função para fechar o modal
+function closeClassModal() {
+  classModal.style.display = 'none';
+}
+
+// Função para gerar ID único para novas turmas
+function generateClassId() {
+  const lastId = classes.length > 0 ? parseInt(classes[classes.length - 1].id.replace('CLS', '')) : 0;
+  const newId = lastId + 1;
+  return `CLS${String(newId).padStart(3, '0')}`;
+}
+
+// Função para salvar uma turma
+function saveClass(e) {
+  e.preventDefault();
+  
+  // Obter valores do formulário
+  const name = document.getElementById('class-name').value;
+  const grade = document.getElementById('class-grade').value;
+  const capacity = parseInt(document.getElementById('class-capacity').value);
+  const directorId = document.getElementById('class-director').value;
+  const description = document.getElementById('class-description').value;
+  
+  // Validar número de alunos
+  if (selectedStudents.length > 25) {
+      alert('Uma turma não pode ter mais de 25 alunos!');
+      return;
+  }
+  
+  // Obter nome do diretor de turma
+  const directorName = document.querySelector(`#class-director option[value="${directorId}"]`).textContent;
+  
+  if (isEditing && currentClassId) {
+      // Atualizar turma existente
+      const classIndex = classes.findIndex(c => c.id === currentClassId);
+      if (classIndex !== -1) {
+          classes[classIndex] = {
+              ...classes[classIndex],
+              name,
+              grade,
+              capacity,
+              director: directorName,
+              directorId,
+              description,
+              students: selectedStudents.length,
+              studentList: [...selectedStudents]
+          };
+      }
+  } else {
+      // Criar nova turma
+      const newClass = {
+          id: generateClassId(),
+          name,
+          grade,
+          capacity,
+          director: directorName,
+          directorId,
+          description,
+          students: selectedStudents.length,
+          capacity: 25,
+          studentList: [...selectedStudents]
+      };
+      classes.push(newClass);
+  }
+  
+  // Atualizar tabela
+  renderClassTable();
+  
+  // Fechar modal
+  closeClassModal();
+}
+
+// Função para renderizar a tabela de turmas
+function renderClassTable() {
+  // Limpar tabela
+  classTableBody.innerHTML = '';
+  
+  // Filtrar turmas
+  const searchTerm = classSearch.value.toLowerCase();
+  const gradeFilterValue = gradeFilter.value;
+  const classFilterValue = classFilter.value;
+  
+  const filteredClasses = classes.filter(cls => {
+      const matchesSearch = cls.name.toLowerCase().includes(searchTerm) || 
+                           cls.director.toLowerCase().includes(searchTerm);
+      const matchesGrade = gradeFilterValue === '' || cls.grade === gradeFilterValue;
+      const matchesClass = classFilterValue === '' || cls.name === classFilterValue;
+      
+      return matchesSearch && matchesGrade && matchesClass;
+  });
+  
+  // Renderizar turmas filtradas
+  filteredClasses.forEach(cls => {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+          <td>${cls.id}</td>
+          <td>${cls.name}</td>
+          <td>${cls.grade}º</td>
+          <td>${cls.director}</td>
+          <td>${cls.students}</td>
+          <td>${cls.capacity}</td>
+          <td>
+              <button class="action-btn edit" title="Editar" data-id="${cls.id}"><i class="fas fa-edit"></i></button>
+              <button class="action-btn view" title="Ver" data-id="${cls.id}"><i class="fas fa-eye"></i></button>
+              <button class="action-btn delete" title="Eliminar" data-id="${cls.id}"><i class="fas fa-trash"></i></button>
+          </td>
+      `;
+      classTableBody.appendChild(row);
+  });
+  
+  // Adicionar event listeners para botões de ação
+  document.querySelectorAll('.action-btn.edit').forEach(btn => {
+      btn.addEventListener('click', function() {
+          const classId = this.getAttribute('data-id');
+          openModal(true, classId);
+      });
+  });
+  
+  document.querySelectorAll('.action-btn.view').forEach(btn => {
+      btn.addEventListener('click', function() {
+          const classId = this.getAttribute('data-id');
+          viewClassDetails(classId);
+      });
+  });
+  
+  document.querySelectorAll('.action-btn.delete').forEach(btn => {
+      btn.addEventListener('click', function() {
+          const classId = this.getAttribute('data-id');
+          deleteClass(classId);
+      });
+  });
+}
+
+// Função para visualizar detalhes da turma
+function viewClassDetails(classId) {
+  const classToView = classes.find(c => c.id === classId);
+  if (!classToView) return;
+  
+  // Criar modal de visualização
+  const viewModal = document.createElement('div');
+  viewModal.className = 'modal';
+  viewModal.id = 'view-class-modal';
+  
+  // Conteúdo do modal
+  viewModal.innerHTML = `
+      <div class="modal-content">
+          <div class="modal-header">
+              <h3>Detalhes da Turma: ${classToView.name}</h3>
+              <span class="close-view-modal">&times;</span>
+          </div>
+          <div class="modal-body">
+              <div class="class-details">
+                  <p><strong>ID:</strong> ${classToView.id}</p>
+                  <p><strong>Nome:</strong> ${classToView.name}</p>
+                  <p><strong>Ano:</strong> ${classToView.grade}º</p>
+                  <p><strong>Diretor de Turma:</strong> ${classToView.director}</p>
+                  <p><strong>Número de Alunos:</strong> ${classToView.students} / ${classToView.capacity}</p>
+                  <p><strong>Descrição:</strong> ${classToView.description || 'Nenhuma descrição disponível.'}</p>
+              </div>
+              
+              <div class="class-students">
+                  <h4>Alunos na Turma</h4>
+                  <div class="student-table-container">
+                      <table class="data-table">
+                          <thead>
+                              <tr>
+                                  <th>ID</th>
+                                  <th>Nome</th>
+                                  <th>Ano</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              ${classToView.studentList && classToView.studentList.length > 0 ? 
+                                  classToView.studentList.map(student => `
+                                      <tr>
+                                          <td>${student.id}</td>
+                                          <td>${student.name}</td>
+                                          <td>${student.grade}º</td>
+                                      </tr>
+                                  `).join('') : 
+                                  '<tr><td colspan="3">Nenhum aluno adicionado a esta turma.</td></tr>'
+                              }
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+              
+              <div class="form-actions">
+                  <button type="button" class="close-view-btn">Fechar</button>
+              </div>
+          </div>
+      </div>
+  `;
+  
+  // Adicionar modal ao DOM
+  document.body.appendChild(viewModal);
+  
+  // Exibir modal
+  viewModal.style.display = 'block';
+  
+  // Event listeners para fechar o modal
+  const closeViewModal = document.querySelector('.close-view-modal');
+  const closeViewBtn = document.querySelector('.close-view-btn');
+  
+  closeViewModal.addEventListener('click', function() {
+      document.body.removeChild(viewModal);
+  });
+  
+  closeViewBtn.addEventListener('click', function() {
+      document.body.removeChild(viewModal);
+  });
+}
+
+// Função para excluir uma turma
+function deleteClass(classId) {
+  if (confirm('Tem certeza que deseja excluir esta turma?')) {
+      classes = classes.filter(c => c.id !== classId);
+      renderClassTable();
+  }
+}
+
+// Event listeners
+document.addEventListener('DOMContentLoaded', function() {
+  // Renderizar tabela inicial
+  renderClassTable();
+  
+  // Abrir modal ao clicar no botão de adicionar turma
+  addClassBtn.addEventListener('click', function() {
+      openModal(false);
+  });
+  
+  // Fechar modal
+  closeModal.addEventListener('click', closeClassModal);
+  cancelBtn.addEventListener('click', closeClassModal);
+  
+  // Fechar modal ao clicar fora dele
+  window.addEventListener('click', function(e) {
+      if (e.target === classModal) {
+          closeClassModal();
+      }
+  });
+  
+  // Salvar turma
+  classForm.addEventListener('submit', saveClass);
+  
+  // Filtros de pesquisa
+  classSearch.addEventListener('input', renderClassTable);
+  gradeFilter.addEventListener('change', renderClassTable);
+  classFilter.addEventListener('change', renderClassTable);
+});
+
+// Função para inicializar a funcionalidade de turmas
+function inicializarGestaoTurmas() {
+  console.log("Inicializando gestão de turmas...");
+  
+  // Dados simulados de alunos cadastrados no sistema
+  const registeredStudents = [
+      { id: 1, name: "Ana Silva", grade: "10" },
+      { id: 2, name: "Bruno Ferreira", grade: "10" },
+      { id: 3, name: "Carla Oliveira", grade: "10" },
+      { id: 4, name: "Daniel Santos", grade: "10" },
+      { id: 5, name: "Eduardo Costa", grade: "10" },
+      { id: 6, name: "Fátima Pereira", grade: "10" },
+      { id: 7, name: "Gabriel Martins", grade: "11" },
+      { id: 8, name: "Helena Rodrigues", grade: "11" },
+      { id: 9, name: "Igor Almeida", grade: "11" },
+      { id: 10, name: "Joana Cardoso", grade: "11" },
+      { id: 11, name: "Luís Ribeiro", grade: "11" },
+      { id: 12, name: "Mariana Gomes", grade: "12" },
+      { id: 13, name: "Nuno Fernandes", grade: "12" },
+      { id: 14, name: "Olívia Pinto", grade: "12" },
+      { id: 15, name: "Paulo Sousa", grade: "12" },
+      { id: 16, name: "Quitéria Lopes", grade: "12" },
+      { id: 17, name: "Ricardo Neves", grade: "13" },
+      { id: 18, name: "Sofia Marques", grade: "13" },
+      { id: 19, name: "Tiago Correia", grade: "13" },
+      { id: 20, name: "Úrsula Dias", grade: "13" },
+      { id: 21, name: "Vítor Moreira", grade: "13" },
+      { id: 22, name: "Xana Teixeira", grade: "10" },
+      { id: 23, name: "Yara Campos", grade: "11" },
+      { id: 24, name: "Zé Carlos", grade: "12" },
+      { id: 25, name: "André Mota", grade: "13" },
+      { id: 26, name: "Beatriz Lima", grade: "10" },
+      { id: 27, name: "Carlos Duarte", grade: "11" },
+      { id: 28, name: "Diana Fonseca", grade: "12" },
+      { id: 29, name: "Elisa Machado", grade: "13" },
+      { id: 30, name: "Fernando Castro", grade: "10" }
+  ];
+
+  // Dados simulados de turmas
+  let classes = [
+      { id: "CLS001", name: "Turma 10ª A Informática", grade: "10", director: "Maria Santos", directorId: "1", students: 22, capacity: 25, studentList: [] },
+      { id: "CLS002", name: "Turma 10ª B Informática", grade: "10", director: "João Oliveira", directorId: "2", students: 18, capacity: 25, studentList: [] },
+      { id: "CLS003", name: "Turma 11ª Informática", grade: "11", director: "Ana Costa", directorId: "3", students: 25, capacity: 25, studentList: [] },
+      { id: "CLS004", name: "Turma 12ª Informática", grade: "12", director: "Carlos Ferreira", directorId: "4", students: 20, capacity: 25, studentList: [] },
+      { id: "CLS005", name: "Turma 13ª Informática", grade: "13", director: "Pedro Silva", directorId: "5", students: 15, capacity: 25, studentList: [] }
+  ];
+
+  // Variáveis de estado
+  let isEditing = false;
+  let currentClassId = null;
+  let selectedStudents = [];
+
+  // Função para abrir o modal
+  function openModal(isEdit = false, classId = null) {
+      console.log("Abrindo modal...");
+      
+      const classModal = document.getElementById('class-modal');
+      const classModalTitle = document.getElementById('class-modal-title');
+      
+      if (!classModal) {
+          console.error("Modal não encontrado!");
+          return;
+      }
+      
+      isEditing = isEdit;
+      currentClassId = classId;
+      selectedStudents = [];
+      
+      // Atualizar título do modal
+      if (classModalTitle) {
+          classModalTitle.textContent = isEditing ? 'Editar Turma' : 'Adicionar Nova Turma';
+      }
+      
+      // Limpar formulário
+      const classForm = document.getElementById('class-form');
+      if (classForm) {
+          classForm.reset();
+      }
+      
+      // Se estiver editando, preencher o formulário com os dados da turma
+      if (isEditing && classId) {
+          const classToEdit = classes.find(c => c.id === classId);
+          if (classToEdit) {
+              const nameInput = document.getElementById('class-name');
+              const gradeSelect = document.getElementById('class-grade');
+              const capacityInput = document.getElementById('class-capacity');
+              const directorSelect = document.getElementById('class-director');
+              const descriptionTextarea = document.getElementById('class-description');
+              
+              if (nameInput) nameInput.value = classToEdit.name;
+              if (gradeSelect) gradeSelect.value = classToEdit.grade;
+              if (capacityInput) capacityInput.value = classToEdit.capacity;
+              if (directorSelect) directorSelect.value = classToEdit.directorId;
+              if (descriptionTextarea) descriptionTextarea.value = classToEdit.description || '';
+              
+              // Carregar alunos da turma se houver
+              if (classToEdit.studentList && classToEdit.studentList.length > 0) {
+                  selectedStudents = [...classToEdit.studentList];
+              }
+          }
+      }
+      
+      // Atualizar o modal para incluir a seleção de alunos
+      updateModalForStudentSelection();
+      
+      // Exibir o modal
+      classModal.style.display = 'block';
+  }
+
+  // Modificar o modal para incluir a seleção de alunos
+  function updateModalForStudentSelection() {
+      const modalBody = document.querySelector('.modal-body');
+      
+      if (!modalBody) {
+          console.error("Modal body não encontrado!");
+          return;
+      }
+      
+      // Verificar se a seção de alunos já existe
+      if (!document.getElementById('student-selection-section')) {
+          // Criar seção de seleção de alunos
+          const studentSection = document.createElement('div');
+          studentSection.id = 'student-selection-section';
+          studentSection.innerHTML = `
+              <h4>Adicionar Alunos à Turma</h4>
+              <div class="form-group">
+                  <div class="student-filter">
+                      <label for="student-grade-filter">Filtrar por Ano:</label>
+                      <select id="student-grade-filter">
+                          <option value="">Todos os Anos</option>
+                          <option value="10">10º Ano</option>
+                          <option value="11">11º Ano</option>
+                          <option value="12">12º Ano</option>
+                          <option value="13">13º Ano</option>
+                      </select>
+                  </div>
+                  <div class="student-search">
+                      <label for="student-search-input">Pesquisar Alunos:</label>
+                      <input type="text" id="student-search-input" placeholder="Nome do aluno...">
+                  </div>
+              </div>
+              <div class="student-list-container">
+                  <div class="student-count-info">
+                      <span id="selected-count">0</span> alunos selecionados de <span id="max-students">25</span>
+                  </div>
+                  <div class="student-list" id="available-students"></div>
+                  <div class="selected-students-container">
+                      <h5>Alunos Selecionados</h5>
+                      <div class="selected-students-list" id="selected-students-list"></div>
+                  </div>
+              </div>
+          `;
+          
+          // Inserir antes dos botões de ação
+          const formActions = document.querySelector('.form-actions');
+          if (formActions) {
+              modalBody.insertBefore(studentSection, formActions);
+          } else {
+              modalBody.appendChild(studentSection);
+          }
+          
+          // Adicionar estilos CSS para a seção de alunos
+          const styleElement = document.createElement('style');
+          styleElement.textContent = `
+              .student-list-container {
+                  margin-top: 15px;
+                  border: 1px solid #ddd;
+                  border-radius: 5px;
+                  padding: 10px;
+              }
+              .student-count-info {
+                  margin-bottom: 10px;
+                  font-weight: bold;
+                  color: #333;
+              }
+              .student-list {
+                  max-height: 200px;
+                  overflow-y: auto;
+                  border: 1px solid #eee;
+                  padding: 10px;
+                  margin-bottom: 15px;
+              }
+              .student-item {
+                  padding: 8px;
+                  border-bottom: 1px solid #eee;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+              }
+              .student-item:hover {
+                  background-color: #f9f9f9;
+              }
+              .student-item button {
+                  background-color: #4CAF50;
+                  color: white;
+                  border: none;
+                  padding: 5px 10px;
+                  border-radius: 3px;
+                  cursor: pointer;
+              }
+              .student-item button.remove-btn {
+                  background-color: #f44336;
+              }
+              .student-item button:hover {
+                  opacity: 0.8;
+              }
+              .student-filter, .student-search {
+                  margin-bottom: 10px;
+              }
+              .selected-students-container {
+                  margin-top: 15px;
+              }
+              .selected-students-list {
+                  max-height: 150px;
+                  overflow-y: auto;
+                  border: 1px solid #eee;
+                  padding: 10px;
+              }
+              .student-grade-filter, .student-search-input {
+                  width: 100%;
+                  padding: 8px;
+                  margin-top: 5px;
+              }
+              .error-message {
+                  color: #f44336;
+                  font-size: 14px;
+                  margin-top: 5px;
+              }
+          `;
+          document.head.appendChild(styleElement);
+          
+          // Renderizar listas de alunos
+          renderAvailableStudents();
+          renderSelectedStudents();
+          
+          // Adicionar event listeners para filtros de alunos
+          const gradeFilter = document.getElementById('student-grade-filter');
+          const searchInput = document.getElementById('student-search-input');
+          
+          if (gradeFilter) {
+              gradeFilter.addEventListener('change', renderAvailableStudents);
+          }
+          
+          if (searchInput) {
+              searchInput.addEventListener('input', renderAvailableStudents);
+          }
+      }
+  }
+
+  // Função para renderizar a lista de alunos disponíveis
+  function renderAvailableStudents() {
+      const availableStudentsList = document.getElementById('available-students');
+      
+      if (!availableStudentsList) {
+          console.error("Lista de alunos disponíveis não encontrada!");
+          return;
+      }
+      
+      const gradeFilter = document.getElementById('student-grade-filter');
+      const searchInput = document.getElementById('student-search-input');
+      
+      const gradeValue = gradeFilter ? gradeFilter.value : '';
+      const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+      
+      // Limpar a lista atual
+      availableStudentsList.innerHTML = '';
+      
+      // Filtrar alunos
+      const filteredStudents = registeredStudents.filter(student => {
+          const matchesGrade = gradeValue === '' || student.grade === gradeValue;
+          const matchesSearch = student.name.toLowerCase().includes(searchTerm);
+          const isNotSelected = !selectedStudents.some(s => s.id === student.id);
+          return matchesGrade && matchesSearch && isNotSelected;
+      });
+      
+      // Verificar se já atingiu o limite de alunos
+      const maxReached = selectedStudents.length >= 25;
+      
+      // Renderizar alunos filtrados
+      if (filteredStudents.length === 0) {
+          availableStudentsList.innerHTML = '<p>Nenhum aluno encontrado.</p>';
+      } else {
+          filteredStudents.forEach(student => {
+              const studentItem = document.createElement('div');
+              studentItem.className = 'student-item';
+              studentItem.innerHTML = `
+                  <span>${student.name} (${student.grade}º Ano)</span>
+                  <button class="add-student-btn" data-id="${student.id}" ${maxReached ? 'disabled' : ''}>
+                      ${maxReached ? 'Limite Atingido' : 'Adicionar'}
+                  </button>
+              `;
+              availableStudentsList.appendChild(studentItem);
+          });
+          
+          // Adicionar event listeners para os botões de adicionar
+          document.querySelectorAll('.add-student-btn').forEach(btn => {
+              btn.addEventListener('click', function() {
+                  const studentId = parseInt(this.getAttribute('data-id'));
+                  addStudentToSelection(studentId);
+              });
+          });
+      }
+      
+      // Atualizar contador
+      updateStudentCounter();
+  }
+
+  // Função para renderizar a lista de alunos selecionados
+  function renderSelectedStudents() {
+      const selectedStudentsList = document.getElementById('selected-students-list');
+      
+      if (!selectedStudentsList) {
+          console.error("Lista de alunos selecionados não encontrada!");
+          return;
+      }
+      
+      // Limpar a lista atual
+      selectedStudentsList.innerHTML = '';
+      
+      // Renderizar alunos selecionados
+      if (selectedStudents.length === 0) {
+          selectedStudentsList.innerHTML = '<p>Nenhum aluno selecionado.</p>';
+      } else {
+          selectedStudents.forEach(student => {
+              const studentItem = document.createElement('div');
+              studentItem.className = 'student-item';
+              studentItem.innerHTML = `
+                  <span>${student.name} (${student.grade}º Ano)</span>
+                  <button class="remove-student-btn remove-btn" data-id="${student.id}">Remover</button>
+              `;
+              selectedStudentsList.appendChild(studentItem);
+          });
+          
+          // Adicionar event listeners para os botões de remover
+          document.querySelectorAll('.remove-student-btn').forEach(btn => {
+              btn.addEventListener('click', function() {
+                  const studentId = parseInt(this.getAttribute('data-id'));
+                  removeStudentFromSelection(studentId);
+              });
+          });
+      }
+      
+      // Atualizar contador
+      updateStudentCounter();
+  }
+
+  // Função para adicionar um aluno à seleção
+  function addStudentToSelection(studentId) {
+      // Verificar se já atingiu o limite
+      if (selectedStudents.length >= 25) {
+          alert('Limite de 25 alunos por turma atingido!');
+          return;
+      }
+      
+      // Encontrar o aluno pelo ID
+      const student = registeredStudents.find(s => s.id === studentId);
+      
+      if (student && !selectedStudents.some(s => s.id === studentId)) {
+          selectedStudents.push(student);
+          renderAvailableStudents();
+          renderSelectedStudents();
+      }
+  }
+
+  // Função para remover um aluno da seleção
+  function removeStudentFromSelection(studentId) {
+      selectedStudents = selectedStudents.filter(s => s.id !== studentId);
+      renderAvailableStudents();
+      renderSelectedStudents();
+  }
+
+  // Função para atualizar o contador de alunos
+  function updateStudentCounter() {
+      const selectedCountElement = document.getElementById('selected-count');
+      if (selectedCountElement) {
+          selectedCountElement.textContent = selectedStudents.length;
+      }
+  }
+
+  // Função para fechar o modal
+  function closeClassModal() {
+      const classModal = document.getElementById('class-modal');
+      if (classModal) {
+          classModal.style.display = 'none';
+      }
+  }
+
+  // Função para gerar ID único para novas turmas
+  function generateClassId() {
+      const lastId = classes.length > 0 ? parseInt(classes[classes.length - 1].id.replace('CLS', '')) : 0;
+      const newId = lastId + 1;
+      return `CLS${String(newId).padStart(3, '0')}`;
+  }
+
+  // Função para salvar uma turma
+  function saveClass(e) {
+      e.preventDefault();
+      
+      // Obter valores do formulário
+      const nameInput = document.getElementById('class-name');
+      const gradeSelect = document.getElementById('class-grade');
+      const capacityInput = document.getElementById('class-capacity');
+      const directorSelect = document.getElementById('class-director');
+      const descriptionTextarea = document.getElementById('class-description');
+      
+      if (!nameInput || !gradeSelect || !capacityInput || !directorSelect) {
+          console.error("Campos do formulário não encontrados!");
+          return;
+      }
+      
+      const name = nameInput.value;
+      const grade = gradeSelect.value;
+      const capacity = parseInt(capacityInput.value);
+      const directorId = directorSelect.value;
+      const description = descriptionTextarea ? descriptionTextarea.value : '';
+      
+      // Validar número de alunos
+      if (selectedStudents.length > 25) {
+          alert('Uma turma não pode ter mais de 25 alunos!');
+          return;
+      }
+      
+      // Obter nome do diretor de turma
+      const directorOption = directorSelect.querySelector(`option[value="${directorId}"]`);
+      const directorName = directorOption ? directorOption.textContent : 'Desconhecido';
+      
+      if (isEditing && currentClassId) {
+          // Atualizar turma existente
+          const classIndex = classes.findIndex(c => c.id === currentClassId);
+          if (classIndex !== -1) {
+              classes[classIndex] = {
+                  ...classes[classIndex],
+                  name,
+                  grade,
+                  capacity,
+                  director: directorName,
+                  directorId,
+                  description,
+                  students: selectedStudents.length,
+                  studentList: [...selectedStudents]
+              };
+          }
+      } else {
+          // Criar nova turma
+          const newClass = {
+              id: generateClassId(),
+              name,
+              grade,
+              capacity,
+              director: directorName,
+              directorId,
+              description,
+              students: selectedStudents.length,
+              capacity: 25,
+              studentList: [...selectedStudents]
+          };
+          classes.push(newClass);
+      }
+      
+      // Atualizar tabela
+      renderClassTable();
+      
+      // Fechar modal
+      closeClassModal();
+  }
+
+  // Função para renderizar a tabela de turmas
+  function renderClassTable() {
+      const classTableBody = document.getElementById('class-table-body');
+      
+      if (!classTableBody) {
+          console.error("Tabela de turmas não encontrada!");
+          return;
+      }
+      
+      // Limpar tabela
+      classTableBody.innerHTML = '';
+      
+      // Filtrar turmas
+      const classSearch = document.getElementById('class-search');
+      const gradeFilter = document.getElementById('grade-filter');
+      const classFilter = document.getElementById('class-filter');
+      
+      const searchTerm = classSearch ? classSearch.value.toLowerCase() : '';
+      const gradeFilterValue = gradeFilter ? gradeFilter.value : '';
+      const classFilterValue = classFilter ? classFilter.value : '';
+      
+      const filteredClasses = classes.filter(cls => {
+          const matchesSearch = cls.name.toLowerCase().includes(searchTerm) || 
+                              cls.director.toLowerCase().includes(searchTerm);
+          const matchesGrade = gradeFilterValue === '' || cls.grade === gradeFilterValue;
+          const matchesClass = classFilterValue === '' || cls.name === classFilterValue;
+          
+          return matchesSearch && matchesGrade && matchesClass;
+      });
+      
+      // Renderizar turmas filtradas
+      filteredClasses.forEach(cls => {
+          const row = document.createElement('tr');
+          row.innerHTML = `
+              <td>${cls.id}</td>
+              <td>${cls.name}</td>
+              <td>${cls.grade}º</td>
+              <td>${cls.director}</td>
+              <td>${cls.students}</td>
+              <td>${cls.capacity}</td>
+              <td>
+                  <button class="action-btn edit" title="Editar" data-id="${cls.id}"><i class="fas fa-edit"></i></button>
+                  <button class="action-btn view" title="Ver" data-id="${cls.id}"><i class="fas fa-eye"></i></button>
+                  <button class="action-btn delete" title="Eliminar" data-id="${cls.id}"><i class="fas fa-trash"></i></button>
+              </td>
+          `;
+          classTableBody.appendChild(row);
+      });
+      
+      // Adicionar event listeners para botões de ação
+      document.querySelectorAll('.action-btn.edit').forEach(btn => {
+          btn.addEventListener('click', function() {
+              const classId = this.getAttribute('data-id');
+              openModal(true, classId);
+          });
+      });
+      
+      document.querySelectorAll('.action-btn.view').forEach(btn => {
+          btn.addEventListener('click', function() {
+              const classId = this.getAttribute('data-id');
+              viewClassDetails(classId);
+          });
+      });
+      
+      document.querySelectorAll('.action-btn.delete').forEach(btn => {
+          btn.addEventListener('click', function() {
+              const classId = this.getAttribute('data-id');
+              deleteClass(classId);
+          });
+      });
+  }
+
+  // Função para visualizar detalhes da turma
+  function viewClassDetails(classId) {
+      const classToView = classes.find(c => c.id === classId);
+      if (!classToView) return;
+      
+      // Verificar se já existe um modal de visualização e removê-lo
+      const existingModal = document.getElementById('view-class-modal');
+      if (existingModal) {
+          document.body.removeChild(existingModal);
+      }
+      
+      // Criar modal de visualização
+      const viewModal = document.createElement('div');
+      viewModal.className = 'modal';
+      viewModal.id = 'view-class-modal';
+      
+      // Conteúdo do modal
+      viewModal.innerHTML = `
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h3>Detalhes da Turma: ${classToView.name}</h3>
+                  <span class="close-view-modal">&times;</span>
+              </div>
+              <div class="modal-body">
+                  <div class="class-details">
+                      <p><strong>ID:</strong> ${classToView.id}</p>
+                      <p><strong>Nome:</strong> ${classToView.name}</p>
+                      <p><strong>Ano:</strong> ${classToView.grade}º</p>
+                      <p><strong>Diretor de Turma:</strong> ${classToView.director}</p>
+                      <p><strong>Número de Alunos:</strong> ${classToView.students} / ${classToView.capacity}</p>
+                      <p><strong>Descrição:</strong> ${classToView.description || 'Nenhuma descrição disponível.'}</p>
+                  </div>
+                  
+                  <div class="class-students">
+                      <h4>Alunos na Turma</h4>
+                      <div class="student-table-container">
+                          <table class="data-table">
+                              <thead>
+                                  <tr>
+                                      <th>ID</th>
+                                      <th>Nome</th>
+                                      <th>Ano</th>
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  ${classToView.studentList && classToView.studentList.length > 0 ? 
+                                      classToView.studentList.map(student => `
+                                          <tr>
+                                              <td>${student.id}</td>
+                                              <td>${student.name}</td>
+                                              <td>${student.grade}º</td>
+                                          </tr>
+                                      `).join('') : 
+                                      '<tr><td colspan="3">Nenhum aluno adicionado a esta turma.</td></tr>'
+                                  }
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+                  
+                  <div class="form-actions">
+                      <button type="button" class="close-view-btn">Fechar</button>
+                  </div>
+              </div>
+          </div>
+      `;
+      
+      // Adicionar modal ao DOM
+      document.body.appendChild(viewModal);
+      
+      // Exibir modal
+      viewModal.style.display = 'block';
+      
+      // Event listeners para fechar o modal
+      const closeViewModal = viewModal.querySelector('.close-view-modal');
+      const closeViewBtn = viewModal.querySelector('.close-view-btn');
+      
+      if (closeViewModal) {
+          closeViewModal.addEventListener('click', function() {
+              document.body.removeChild(viewModal);
+          });
+      }
+      
+      if (closeViewBtn) {
+          closeViewBtn.addEventListener('click', function() {
+              document.body.removeChild(viewModal);
+          });
+      }
+  }
+
+  // Função para excluir uma turma
+  function deleteClass(classId) {
+      if (confirm('Tem certeza que deseja excluir esta turma?')) {
+          classes = classes.filter(c => c.id !== classId);
+          renderClassTable();
+      }
+  }
+
+  // Configurar event listeners
+  function setupEventListeners() {
+      console.log("Configurando event listeners...");
+      
+      // Botão de adicionar turma
+      const addClassBtn = document.getElementById('add-class-btn');
+      if (addClassBtn) {
+          addClassBtn.addEventListener('click', function() {
+              console.log("Botão Adicionar Turma clicado!");
+              openModal(false);
+          });
+      } else {
+          console.error("Botão 'Adicionar Turma' não encontrado!");
+      }
+      
+      // Fechar modal
+      const closeModal = document.querySelector('.close-modal');
+      const cancelBtn = document.querySelector('.cancel-btn');
+      const classModal = document.getElementById('class-modal');
+      
+      if (closeModal) {
+          closeModal.addEventListener('click', closeClassModal);
+      }
+      
+      if (cancelBtn) {
+          cancelBtn.addEventListener('click', closeClassModal);
+      }
+      
+      // Fechar modal ao clicar fora dele
+      if (classModal) {
+          window.addEventListener('click', function(e) {
+              if (e.target === classModal) {
+                  closeClassModal();
+              }
+          });
+      }
+      
+      // Salvar turma
+      const classForm = document.getElementById('class-form');
+      if (classForm) {
+          classForm.addEventListener('submit', saveClass);
+      }
+      
+      // Filtros de pesquisa
+      const classSearch = document.getElementById('class-search');
+      const gradeFilter = document.getElementById('grade-filter');
+      const classFilter = document.getElementById('class-filter');
+      
+      if (classSearch) {
+          classSearch.addEventListener('input', renderClassTable);
+      }
+      
+      if (gradeFilter) {
+          gradeFilter.addEventListener('change', renderClassTable);
+      }
+      
+      if (classFilter) {
+          classFilter.addEventListener('change', renderClassTable);
+      }
+  }
+
+  // Inicializar a tabela de turmas
+  renderClassTable();
+  
+  // Configurar event listeners
+  setupEventListeners();
+  
+  console.log("Gestão de turmas inicializada com sucesso!");
+}
+
+// Garantir que o script seja executado após o carregamento completo da página
+document.addEventListener('DOMContentLoaded', function() {
+  console.log("Documento carregado. Iniciando gestão de turmas...");
+  inicializarGestaoTurmas();
+});
+
+// Adicionar um listener de fallback para garantir que o script seja executado
+window.addEventListener('load', function() {
+  console.log("Janela carregada. Verificando se a gestão de turmas já foi inicializada...");
+  // Verificar se o botão já tem um listener
+  const addClassBtn = document.getElementById('add-class-btn');
+  if (addClassBtn && !addClassBtn._hasClickListener) {
+      console.log("Inicializando gestão de turmas (fallback)...");
+      inicializarGestaoTurmas();
+      // Marcar que o botão já tem um listener
+      addClassBtn._hasClickListener = true;
+  }
+});
+
+// Garantir que o botão funcione mesmo se for adicionado depois
+function garantirFuncionamentoBotao() {
+  console.log("Verificando botão 'Adicionar Turma'...");
+  const addClassBtn = document.getElementById('add-class-btn');
+  if (addClassBtn && !addClassBtn._hasClickListener) {
+      console.log("Adicionando listener ao botão 'Adicionar Turma'...");
+      addClassBtn.addEventListener('click', function() {
+          console.log("Botão Adicionar Turma clicado!");
+          const classModal = document.getElementById('class-modal');
+          if (classModal) {
+              classModal.style.display = 'block';
+          } else {
+              console.error("Modal não encontrado!");
+          }
+      });
+      addClassBtn._hasClickListener = true;
+  }
+}
+
+// Executar a verificação do botão periodicamente
+setInterval(garantirFuncionamentoBotao, 1000);
+
+// Carrega os diretores de turma dinamicamente
+function loadDirectors() {
+  const directorSelect = document.getElementById('class-director');
+  if (!directorSelect) return;
+
+  // Limpa opções existentes (mantendo a primeira)
+  while (directorSelect.options.length > 1) {
+      directorSelect.remove(1);
+  }
+
+  // Adiciona diretores (poderia vir de uma API)
+  const directors = [
+      { id: '1', name: 'Maria Santos' },
+      { id: '2', name: 'João Oliveira' },
+      { id: '3', name: 'Ana Costa' },
+      { id: '4', name: 'Carlos Ferreira' },
+      { id: '5', name: 'Pedro Silva' }
+  ];
+
+  directors.forEach(director => {
+      const option = document.createElement('option');
+      option.value = director.id;
+      option.textContent = director.name;
+      directorSelect.appendChild(option);
+  });
+}
+
+// Gerenciamento da seleção de alunos
+document.getElementById('add-students-btn')?.addEventListener('click', function() {
+  // Abre o modal de seleção de alunos
+  document.getElementById('students-modal').style.display = 'block';
+  
+  // Carrega alunos disponíveis (exemplo)
+  const availableStudents = [
+      { id: 'ALU001', name: 'Ana Silva', grade: '10' },
+      { id: 'ALU002', name: 'Bruno Costa', grade: '10' },
+      // ... mais alunos
+  ];
+  
+  renderAvailableStudents(availableStudents);
+});
+
+function renderAvailableStudents(students) {
+  const container = document.getElementById('available-students');
+  if (!container) return;
+  
+  container.innerHTML = '';
+  
+  students.forEach(student => {
+      const studentEl = document.createElement('div');
+      studentEl.className = 'student-item';
+      studentEl.dataset.id = student.id;
+      studentEl.innerHTML = `
+          <input type="checkbox" id="student-${student.id}" class="student-checkbox">
+          <label for="student-${student.id}">${student.name} (${student.grade}º)</label>
+      `;
+      container.appendChild(studentEl);
+  });
+}
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', function() {
+  loadDirectors();
+  
+  // Atualiza contador de capacidade
+  document.getElementById('class-capacity')?.addEventListener('change', function() {
+      document.getElementById('max-students').textContent = this.value;
+  });
+});
+
+// Carregar turmas dinamicamente
+function loadClasses() {
+  fetch('api/get_classes.php')
+      .then(response => response.json())
+      .then(data => {
+          const classSelects = document.querySelectorAll('#student-class, #class-filter');
+          
+          classSelects.forEach(select => {
+              // Limpar opções exceto a primeira
+              while (select.options.length > 1) {
+                  select.remove(1);
+              }
+              
+              // Adicionar novas opções
+              data.forEach(turma => {
+                  const option = document.createElement('option');
+                  option.value = turma.nome;
+                  option.textContent = turma.nome;
+                  select.appendChild(option);
+              });
+          });
+      })
+      .catch(error => console.error('Erro ao carregar turmas:', error));
+}
+
+// Carregar encarregados dinamicamente
+function loadGuardians() {
+  fetch('api/get_guardians.php')
+      .then(response => response.json())
+      .then(data => {
+          const guardianSelect = document.getElementById('parents');
+          
+          // Limpar opções exceto a primeira
+          while (guardianSelect.options.length > 1) {
+              guardianSelect.remove(1);
+          }
+          
+          // Adicionar novas opções
+          data.forEach(encarregado => {
+              const option = document.createElement('option');
+              option.value = encarregado.id;
+              option.textContent = `${encarregado.nome} (${encarregado.parentesco})`;
+              guardianSelect.appendChild(option);
+          });
+      })
+      .catch(error => console.error('Erro ao carregar encarregados:', error));
+}
+
+// Preview de imagens antes do upload
+function setupImagePreviews() {
+  const setupPreview = (inputId, previewId) => {
+      const input = document.getElementById(inputId);
+      const preview = document.getElementById(previewId);
+      
+      input.addEventListener('change', function() {
+          if (this.files && this.files[0]) {
+              const reader = new FileReader();
+              
+              reader.onload = function(e) {
+                  preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+              }
+              
+              reader.readAsDataURL(this.files[0]);
+          }
+      });
+  };
+  
+  setupPreview('bi-front', 'bi-front-preview');
+  setupPreview('bi-back', 'bi-back-preview');
+  setupPreview('student-photo', 'student-photo-preview');
+}
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', function() {
+  loadClasses();
+  loadGuardians();
+  setupImagePreviews();
+  
+  // Mostrar mensagens de feedback
+  if (sessionStorage.getItem('success')) {
+      alert(sessionStorage.getItem('success'));
+      sessionStorage.removeItem('success');
+  }
+  
+  if (sessionStorage.getItem('error')) {
+      alert(sessionStorage.getItem('error'));
+      sessionStorage.removeItem('error');
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Controle dos modais
+  const studentModal = document.getElementById('student-modal');
+  const guardianModal = document.getElementById('guardian-modal');
+  const classModal = document.getElementById('class-modal');
+  
+  // Carregar turmas e encarregados
+  async function loadInitialData() {
+      await loadClasses();
+      await loadGuardians();
+  }
+  
+  // Abrir modal de aluno
+  document.getElementById('add-student-btn')?.addEventListener('click', function() {
+      studentModal.style.display = 'block';
+      loadInitialData();
+  });
+  
+  // Cadastrar novo encarregado
+  document.getElementById('guardian-form')?.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = {
+          nome: document.getElementById('guardian-name').value,
+          parentesco: document.getElementById('guardian-relation').value,
+          telefone: document.getElementById('guardian-phone').value
+      };
+      
+      try {
+          const response = await fetch('api/save_guardian.php', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(formData)
+          });
+          
+          const result = await response.json();
+          
+          if (result.success) {
+              alert('Encarregado cadastrado com sucesso!');
+              await loadGuardians();
+              guardianModal.style.display = 'none';
+              
+              // Seleciona automaticamente o novo encarregado
+              const select = document.getElementById('parents');
+              select.value = result.id;
+          } else {
+              alert('Erro: ' + result.message);
+          }
+      } catch (error) {
+          console.error('Erro:', error);
+          alert('Erro ao cadastrar encarregado');
+      }
+  });
+  
+  // Cadastrar nova turma
+  document.getElementById('class-form')?.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const formData = {
+          nome: document.getElementById('new-class-name').value,
+          ano: document.getElementById('new-class-grade').value,
+          capacidade: document.getElementById('new-class-capacity').value
+      };
+      
+      try {
+          const response = await fetch('api/save_class.php', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(formData)
+          });
+          
+          const result = await response.json();
+          
+          if (result.success) {
+              alert('Turma cadastrada com sucesso!');
+              await loadClasses();
+              classModal.style.display = 'none';
+              
+              // Seleciona automaticamente a nova turma
+              const select = document.getElementById('student-class');
+              select.value = result.id;
+              updateClassCapacityInfo();
+          } else {
+              alert('Erro: ' + result.message);
+          }
+      } catch (error) {
+          console.error('Erro:', error);
+          alert('Erro ao cadastrar turma');
+      }
+  });
+  
+  // Fechar todos os modais
+  function closeAllModals() {
+      studentModal.style.display = 'none';
+      guardianModal.style.display = 'none';
+      classModal.style.display = 'none';
+  }
+  
+  // Carregar turmas disponíveis
+  async function loadClasses() {
+      try {
+          const response = await fetch('api/get_classes.php');
+          const { data: classes } = await response.json();
+          
+          const select = document.getElementById('student-class');
+          select.innerHTML = '<option value="">Selecione uma turma</option>';
+          
+          classes.forEach(turma => {
+              const option = document.createElement('option');
+              option.value = turma.id;
+              option.textContent = turma.nome;
+              option.dataset.capacity = turma.capacidade;
+              option.dataset.current = turma.alunos_matriculados;
+              select.appendChild(option);
+          });
+          
+          updateClassCapacityInfo();
+      } catch (error) {
+          console.error('Erro ao carregar turmas:', error);
+      }
+  }
+  
+  // Carregar encarregados
+  async function loadGuardians() {
+      try {
+          const response = await fetch('api/get_guardians.php');
+          const { data: guardians } = await response.json();
+          
+          const select = document.getElementById('parents');
+          select.innerHTML = '<option value="">Selecione um encarregado</option>';
+          
+          guardians.forEach(encarregado => {
+              const option = document.createElement('option');
+              option.value = encarregado.id;
+              option.textContent = `${encarregado.nome} (${encarregado.parentesco})`;
+              select.appendChild(option);
+          });
+      } catch (error) {
+          console.error('Erro ao carregar encarregados:', error);
+      }
+  }
+  
+  // Atualizar informação de capacidade da turma
+  function updateClassCapacityInfo() {
+      const select = document.getElementById('student-class');
+      const infoDiv = document.getElementById('class-capacity-info');
+      const saveBtn = document.querySelector('#student-form .save-btn');
+      
+      const selectedOption = select.options[select.selectedIndex];
+      
+      if (selectedOption && selectedOption.value) {
+          const capacity = parseInt(selectedOption.dataset.capacity);
+          const current = parseInt(selectedOption.dataset.current);
+          
+          if (current >= capacity) {
+              infoDiv.innerHTML = `<span class="error">Turma lotada (${current}/${capacity})</span>`;
+              if (saveBtn) saveBtn.disabled = true;
+          } else {
+              infoDiv.innerHTML = `Vagas disponíveis: ${capacity - current}/${capacity}`;
+              if (saveBtn) saveBtn.disabled = false;
+          }
+      } else {
+          if (infoDiv) infoDiv.innerHTML = '';
+          if (saveBtn) saveBtn.disabled = false;
+      }
+  }
+  
+  // Observar mudanças na seleção de turma
+  document.getElementById('student-class')?.addEventListener('change', updateClassCapacityInfo);
+  
+  // Fechar modais
+  document.querySelectorAll('.close-modal, .cancel-btn').forEach(btn => {
+      btn.addEventListener('click', closeAllModals);
+  });
+  
+  window.addEventListener('click', function(e) {
+      if (e.target === studentModal || e.target === guardianModal || e.target === classModal) {
+          closeAllModals();
+      }
+  });
+  
+  // Preview de imagens
+  function setupImagePreviews() {
+      document.querySelectorAll('input[type="file"]').forEach(input => {
+          input.addEventListener('change', function() {
+              const previewId = this.id + '-preview';
+              const preview = document.getElementById(previewId);
+              
+              if (this.files && this.files[0]) {
+                  const reader = new FileReader();
+                  
+                  reader.onload = function(e) {
+                      preview.innerHTML = `<img src="${e.target.result}">`;
+                  }
+                  
+                  reader.readAsDataURL(this.files[0]);
+              }
+          });
+      });
+  }
+  
+  setupImagePreviews();
+});
+
+async function saveGuardian(formData) {
+  try {
+      const response = await fetch('api/guardians.php', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+              'X-Requested-With': 'XMLHttpRequest'
+          },
+          body: JSON.stringify(formData)
+      });
+
+      // Verificar se a resposta é JSON
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+          const text = await response.text();
+          throw new Error(`Resposta inesperada: ${text.substring(0, 100)}...`);
+      }
+
+      const data = await response.json();
+      
+      if (!response.ok) {
+          throw new Error(data.message || 'Erro no servidor');
+      }
+
+      return data;
+  } catch (error) {
+      console.error('Erro completo:', {
+          error: error,
+          request: formData,
+          time: new Date().toISOString()
+      });
+      throw error;
+  }
+}
+
+// Uso no seu event listener
+guardianForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const submitBtn = e.target.querySelector('.save-btn');
+  submitBtn.disabled = true;
+  
+  try {
+      const formData = {
+          // seus dados do formulário
+      };
+      
+      const result = await saveGuardian(formData);
+      showSuccessMessage(result.message);
+      
+  } catch (error) {
+      showErrorMessage(
+          error.message.includes('Resposta inesperada') ? 
+          'Erro no servidor. Verifique os logs.' : 
+          error.message
+      );
+  } finally {
+      submitBtn.disabled = false;
+  }
+});

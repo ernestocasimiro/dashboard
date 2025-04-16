@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
+
+    ?>
+
 <!DOCTYPE html>
 <html lang="pt">
 <head>
@@ -6,6 +13,42 @@
   <title>Boletins - Sistema de Gestão Escolar</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    .user-dropdown {
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 4px;
+      padding: 8px 0;
+      z-index: 1000;
+      min-width: 150px;
+    }
+    
+    .dropdown-menu.show {
+      display: block;
+    }
+    
+    .dropdown-item {
+      padding: 8px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #333;
+      text-decoration: none;
+    }
+    
+    .dropdown-item:hover {
+      background-color: #f5f5f5;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
@@ -162,10 +205,7 @@
                   </a>
               </li>
           </ul>
-          <div class="logout">
-              <i class="fas fa-sign-out-alt"></i> 
-              <span>Sair</span>
-          </div>
+         
       </nav>
       
       <main class="content">
@@ -175,13 +215,16 @@
                   <input type="text" placeholder="Pesquisar...">
               </div>
               <div class="user-info">
-                  <div class="notifications">
-                      <i class="fas fa-bell"></i>
-                      <span class="badge">3</span>
-                  </div>
-                  <div class="user">
-                      <img src="images/semfoto.jpeg" alt="Admin User">
-                      <span>Administrador</span>
+                  <div class="user user-dropdown">
+                        <img src="login\images\semft-removebg-preview.png" alt="" class="userOptions__avatar img-circle" width="42" height="42">
+                        <span><?php echo $_SESSION['fname']; ?></span>
+
+                        <div class="dropdown-menu">
+                        <a href="/dashboardpitruca_copia/login/logout.php" class="dropdown-item">
+                            <i class="fas fa-sign-out-alt"></i> Sair
+                        </a>
+
+                        </div>
                   </div>
               </div>
           </header>
@@ -400,4 +443,9 @@
   <script src="js/script.js"></script>
 </body>
 </html>
+
+<?php }else{
+    header("Location: ../login.php");
+    exit;
+} ?>
 
