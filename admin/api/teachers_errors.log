@@ -1,0 +1,56 @@
+[18-Apr-2025 22:21:45 Europe/Berlin] PDO Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'escolabd.teachers' doesn't exist
+[18-Apr-2025 22:44:44 Europe/Berlin] Error: Ação inválida ou método não permitido
+[18-Apr-2025 22:46:36 Europe/Berlin] Error: Ação inválida ou método não permitido
+[18-Apr-2025 22:47:45 Europe/Berlin] Error: Ação inválida ou método não permitido
+[21-Apr-2025 08:37:58 Europe/Berlin] Error: Senha obrigatória com no mínimo 8 caracteres
+[21-Apr-2025 08:38:13 Europe/Berlin] Error: Senha obrigatória com no mínimo 8 caracteres
+[21-Apr-2025 08:39:19 Europe/Berlin] Error: Senha obrigatória com no mínimo 8 caracteres
+[21-Apr-2025 08:40:04 Europe/Berlin] Error: Senha obrigatória com no mínimo 8 caracteres
+[21-Apr-2025 08:40:06 Europe/Berlin] Error: Senha obrigatória com no mínimo 8 caracteres
+[21-Apr-2025 08:40:25 Europe/Berlin] Error: Senha obrigatória com no mínimo 8 caracteres
+[21-Apr-2025 08:40:43 Europe/Berlin] Error: Senha obrigatória com no mínimo 8 caracteres
+[21-Apr-2025 08:57:39 Europe/Berlin] PDO Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'first_name' in 'field list'
+[21-Apr-2025 20:29:43 Europe/Berlin] Error: O campo fname é obrigatório
+[21-Apr-2025 20:31:26 Europe/Berlin] Error: O campo fname é obrigatório
+[21-Apr-2025 20:32:34 Europe/Berlin] Error: O campo fname é obrigatório
+[21-Apr-2025 20:33:19 Europe/Berlin] PHP Warning:  Undefined array key "id" in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\teachers.php on line 142
+[21-Apr-2025 20:33:19 Europe/Berlin] PHP Warning:  Undefined array key "last_name" in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\teachers.php on line 144
+[21-Apr-2025 20:33:19 Europe/Berlin] PDO Error: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[21-Apr-2025 20:33:34 Europe/Berlin] PHP Warning:  Undefined array key "id" in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\teachers.php on line 142
+[21-Apr-2025 20:33:34 Europe/Berlin] PHP Warning:  Undefined array key "last_name" in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\teachers.php on line 144
+[21-Apr-2025 20:33:34 Europe/Berlin] PDO Error: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[21-Apr-2025 20:37:41 Europe/Berlin] PHP Warning:  Undefined array key "id" in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\teachers.php on line 142
+[21-Apr-2025 20:37:41 Europe/Berlin] PHP Warning:  Undefined array key "last_name" in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\teachers.php on line 144
+[21-Apr-2025 20:37:41 Europe/Berlin] PDO Error: SQLSTATE[HY093]: Invalid parameter number: number of bound variables does not match number of tokens
+[21-Apr-2025 20:51:29 Europe/Berlin] Error: O campo first_name é obrigatório
+[21-Apr-2025 20:53:30 Europe/Berlin] Error: O campo first_name é obrigatório
+[21-Apr-2025 20:57:07 Europe/Berlin] Error: O campo first_name é obrigatório
+[21-Apr-2025 20:58:22 Europe/Berlin] Error: Ação inválida
+[22-Apr-2025 21:18:16 Europe/Berlin] Error: Ação inválida
+[22-Apr-2025 21:39:07 Europe/Berlin] Error: Ação inválida
+[22-Apr-2025 21:39:09 Europe/Berlin] Error: Ação inválida
+[22-Apr-2025 21:58:52 Europe/Berlin] Error: Ação inválida
+[22-Apr-2025 21:59:30 Europe/Berlin] Error: Ação inválida
+[22-Apr-2025 22:03:32 Europe/Berlin] Error: Ação inválida
+[22-Apr-2025 22:03:32 Europe/Berlin] Error: Ação inválida
+[23-Apr-2025 10:08:57 Europe/Berlin] Error: Ação inválida
+[23-Apr-2025 10:08:57 Europe/Berlin] Error: Ação inválida
+[23-Apr-2025 10:09:31 Europe/Berlin] Error: Ação inválida
+[23-Apr-2025 10:09:31 Europe/Berlin] Error: Ação inválida
+[23-Apr-2025 10:16:46 Europe/Berlin] Error: Ação inválida
+[23-Apr-2025 10:16:46 Europe/Berlin] Error: Ação inválida
+[23-Apr-2025 10:18:38 Europe/Berlin] Error: Ação inválida
+[23-Apr-2025 10:19:57 Europe/Berlin] Error: Ação inválida
+[23-Apr-2025 10:22:10 Europe/Berlin] Error: Ação inválida
+[23-Apr-2025 10:25:59 Europe/Berlin] Error: Ação inválida
+[23-Apr-2025 10:30:36 Europe/Berlin] Error: Ação inválida
+[23-Apr-2025 10:30:46 Europe/Berlin] Error: Ação inválida
+[23-Apr-2025 10:31:24 Europe/Berlin] Error: Ação inválida
+[23-Apr-2025 10:31:25 Europe/Berlin] Error: Ação inválida
+[23-Apr-2025 10:32:42 Europe/Berlin] Error: Ação inválida
+[23-Apr-2025 10:32:42 Europe/Berlin] Error: Ação inválida
+[26-Apr-2025 11:19:26 Europe/Berlin] Error: Método não permitido para esta ação
+[26-Apr-2025 14:40:23 Europe/Berlin] Error: Ação inválida
+[26-Apr-2025 14:40:24 Europe/Berlin] Error: Ação inválida
+[26-Apr-2025 14:40:35 Europe/Berlin] Error: Ação inválida
+[28-Apr-2025 10:56:38 Europe/Berlin] Error: Ação inválida

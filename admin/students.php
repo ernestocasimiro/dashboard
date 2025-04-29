@@ -276,7 +276,7 @@
                       <li data-tab="register-teachers">
                           <a href="teacher.php">
                               <i class="fas fa-user-plus"></i> 
-                              <span>Professores/Coordenadores</span>
+                              <span>Professores</span>
                           </a>
                       </li>
                   </ul>
@@ -347,10 +347,6 @@
                   </a>
               </li>
           </ul>
-          <div class="logout">
-              <i class="fas fa-sign-out-alt"></i> 
-              <span>Sair</span>
-          </div>
       </nav>
       
       <main class="content">
@@ -413,71 +409,7 @@
                               </tr>
                           </thead>
                           <tbody id="student-table-body">
-                              <tr>
-                                  <td>STU001</td>
-                                  <td>João Silva</td>
-                                  <td>Turma 10ª A Informática</td>
-                                  <td>Masculino</td>
-                                  <td>+244 923 456 789</td>
-                                  <td><span class="status-badge present">90%</span></td>
-                                  <td>
-                                      <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-                                      <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
-                                      <button class="action-btn delete" title="Eliminar"><i class="fas fa-trash"></i></button>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>STU002</td>
-                                  <td>Maria Santos</td>
-                                  <td>Turma 10ª A Informática</td>
-                                  <td>Feminino</td>
-                                  <td>+244 923 456 790</td>
-                                  <td><span class="status-badge present">95%</span></td>
-                                  <td>
-                                      <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-                                      <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
-                                      <button class="action-btn delete" title="Eliminar"><i class="fas fa-trash"></i></button>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>STU003</td>
-                                  <td>Pedro Oliveira</td>
-                                  <td>Turma 10ª B Informática</td>
-                                  <td>Masculino</td>
-                                  <td>+244 923 456 791</td>
-                                  <td><span class="status-badge absent">85%</span></td>
-                                  <td>
-                                      <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-                                      <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
-                                      <button class="action-btn delete" title="Eliminar"><i class="fas fa-trash"></i></button>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>STU004</td>
-                                  <td>Ana Costa</td>
-                                  <td>Turma 10ª A Informática</td>
-                                  <td>Feminino</td>
-                                  <td>+244 923 456 792</td>
-                                  <td><span class="status-badge late">92%</span></td>
-                                  <td>
-                                      <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-                                      <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
-                                      <button class="action-btn delete" title="Eliminar"><i class="fas fa-trash"></i></button>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>STU005</td>
-                                  <td>Carlos Ferreira</td>
-                                  <td>Turma 11ª Informática</td>
-                                  <td>Masculino</td>
-                                  <td>+244 923 456 793</td>
-                                  <td><span class="status-badge present">88%</span></td>
-                                  <td>
-                                      <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-                                      <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
-                                      <button class="action-btn delete" title="Eliminar"><i class="fas fa-trash"></i></button>
-                                  </td>
-                              </tr>
+                                        <!-- Alunos -->
                           </tbody>
                       </table>
                   </div>
@@ -493,6 +425,7 @@
           </div>
       </main>
   </div>
+  
   <div class="modal" id="student-modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -593,9 +526,6 @@
                             <select id="student-class" name="turma" required>
                                 <option value="">Carregando turmas...</option>
                             </select>
-                            <button type="button" class="small-btn" id="add-class-btn">
-                                <i class="fas fa-plus"></i> Nova Turma
-                            </button>
                         </div>
                         <div id="class-capacity-info" class="capacity-info"></div>
                     </div>
@@ -628,9 +558,6 @@
                             <select id="parents" name="encarregado" required>
                                 <option value="">Carregando encarregados...</option>
                             </select>
-                            <button type="button" class="small-btn" id="add-guardian-btn">
-                                <i class="fas fa-plus"></i> Novo Encarregado
-                            </button>
                         </div>
                     </div>
                 </fieldset>
@@ -769,12 +696,11 @@
       // No special automatic display - dropdown only shows when clicked
     });
 
-// Carregar encarregados para o select
-function loadGuardiansForSelect() {
+    function loadGuardiansForSelect() {
     fetch('api/guardians.php?action=getAll')
         .then(response => response.json())
         .then(data => {
-            const select = document.getElementById('student-guardian');
+            const select = document.getElementById('parents'); // ID correto do form
             select.innerHTML = '<option value="">Selecionar Encarregado</option>';
             
             data.forEach(guardian => {
@@ -784,8 +710,9 @@ function loadGuardiansForSelect() {
                 select.appendChild(option);
             });
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => console.error('Erro ao carregar encarregados:', error));
 }
+
 
 // Botão para adicionar novo encarregado
 document.getElementById('add-new-guardian-btn').addEventListener('click', function() {

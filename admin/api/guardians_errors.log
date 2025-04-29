@@ -168,3 +168,206 @@ Stack trace:
 Stack trace:
 #0 {main}
   thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 32
+[16-Apr-2025 20:52:28 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../db_connect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 64
+[16-Apr-2025 20:52:28 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../db_connect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:64
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 64
+[16-Apr-2025 21:40:57 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../db_connect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:40:57 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../db_connect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:40:57 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../db_connect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:56
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:40:57 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../db_connect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:56
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:42:37 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../db_connect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:42:37 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../db_connect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:42:37 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../db_connect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:56
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:42:37 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../db_connect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:56
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:50:28 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:50:28 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:50:28 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:56
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:50:28 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:56
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:51:01 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:51:01 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:51:01 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:56
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:51:01 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:56
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:51:09 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:51:09 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:51:09 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:56
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:51:09 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:56
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:51:15 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:51:15 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:51:15 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:56
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:51:15 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:56
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:51:23 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:51:23 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:51:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:56
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:51:23 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:56
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 56
+[16-Apr-2025 21:55:26 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 58
+[16-Apr-2025 21:55:26 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:58
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 58
+[16-Apr-2025 21:57:17 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 58
+[16-Apr-2025 21:57:17 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:58
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 58
+[16-Apr-2025 21:57:22 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 58
+[16-Apr-2025 21:57:22 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:58
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 58
+[16-Apr-2025 21:58:12 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 58
+[16-Apr-2025 21:58:12 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:58
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 58
+[16-Apr-2025 21:58:15 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 58
+[16-Apr-2025 21:58:15 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:58
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 58
+[16-Apr-2025 22:00:07 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 22:00:07 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:59
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 22:00:27 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 22:00:27 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:59
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 22:00:27 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 22:00:27 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:59
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 22:00:30 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 22:00:30 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/../dbconnect.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:59
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 22:00:55 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\apiadmin\dbconnection.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 22:00:55 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\apiadmin\dbconnection.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:59
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 22:00:58 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\apiadmin\dbconnection.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 22:00:58 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\apiadmin\dbconnection.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:59
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 22:01:14 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\apiC:\xampp\htdocs\dashboardpitruca_copia\admin\dbconnection.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 22:01:14 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\apiC:\xampp\htdocs\dashboardpitruca_copia\admin\dbconnection.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:59
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 22:01:33 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/admin/dbconnection.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 22:01:33 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/admin/dbconnection.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:59
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 23:58:48 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/admin/dbconnection.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 23:58:48 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/admin/dbconnection.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 23:58:48 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/admin/dbconnection.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:59
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 23:58:48 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/admin/dbconnection.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:59
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 23:59:19 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/admin/dbconnection.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 23:59:19 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/admin/dbconnection.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:59
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 23:59:19 Europe/Berlin] PHP Warning:  require_once(C:\xampp\htdocs\dashboardpitruca_copia\admin\api/admin/dbconnection.php): Failed to open stream: No such file or directory in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[16-Apr-2025 23:59:19 Europe/Berlin] PHP Fatal error:  Uncaught Error: Failed opening required 'C:\xampp\htdocs\dashboardpitruca_copia\admin\api/admin/dbconnection.php' (include_path='C:\xampp\php\PEAR') in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php:59
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\dashboardpitruca_copia\admin\api\guardians.php on line 59
+[17-Apr-2025 00:13:05 Europe/Berlin] Error: Método não permitido
+[17-Apr-2025 00:13:07 Europe/Berlin] Error: Método não permitido
+[17-Apr-2025 00:13:57 Europe/Berlin] Error: Método não permitido
+[17-Apr-2025 00:20:57 Europe/Berlin] Erro ao buscar encarregados: SQLSTATE[42S22]: Column not found: 1054 Unknown column 's.name' in 'field list'
+[17-Apr-2025 00:20:59 Europe/Berlin] Erro ao buscar encarregados: SQLSTATE[42S22]: Column not found: 1054 Unknown column 's.name' in 'field list'
+[17-Apr-2025 00:22:29 Europe/Berlin] Erro ao buscar encarregados: SQLSTATE[42S22]: Column not found: 1054 Unknown column 's.name' in 'field list'
+[17-Apr-2025 00:22:32 Europe/Berlin] Erro ao buscar encarregados: SQLSTATE[42S22]: Column not found: 1054 Unknown column 's.name' in 'field list'
+[17-Apr-2025 00:23:25 Europe/Berlin] Erro ao buscar encarregados: SQLSTATE[42S22]: Column not found: 1054 Unknown column 's.name' in 'field list'
+[17-Apr-2025 00:25:06 Europe/Berlin] Erro ao buscar encarregados: SQLSTATE[42S22]: Column not found: 1054 Unknown column 's.name' in 'field list'
+[17-Apr-2025 00:25:08 Europe/Berlin] Erro ao buscar encarregados: SQLSTATE[42S22]: Column not found: 1054 Unknown column 's.name' in 'field list'
+[17-Apr-2025 00:25:43 Europe/Berlin] Erro ao buscar encarregados: SQLSTATE[42S22]: Column not found: 1054 Unknown column 's.name' in 'field list'
+[17-Apr-2025 00:26:10 Europe/Berlin] Erro ao buscar encarregados: SQLSTATE[42S22]: Column not found: 1054 Unknown column 's.name' in 'field list'
+[17-Apr-2025 00:26:14 Europe/Berlin] Erro ao buscar encarregados: SQLSTATE[42S22]: Column not found: 1054 Unknown column 's.name' in 'field list'
+[17-Apr-2025 00:27:40 Europe/Berlin] Erro ao buscar encarregados: SQLSTATE[42S22]: Column not found: 1054 Unknown column 's.name' in 'field list'
+[17-Apr-2025 00:28:27 Europe/Berlin] Erro ao buscar encarregados: SQLSTATE[42S22]: Column not found: 1054 Unknown column 's.name' in 'field list'
+[17-Apr-2025 00:48:33 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 00:48:50 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 00:50:23 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 00:53:38 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 00:58:30 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 01:00:32 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 01:00:37 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 01:00:39 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 01:01:06 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 01:02:03 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 01:02:08 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 01:02:43 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 01:07:01 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 01:07:03 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 01:16:58 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 01:17:02 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 01:17:05 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 01:19:38 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 01:19:40 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 01:19:41 Europe/Berlin] Error: Ação inválida ou método não permitido
+[17-Apr-2025 01:25:18 Europe/Berlin] Error: Ação inválida ou método não permitido
+[18-Apr-2025 22:13:04 Europe/Berlin] Error: Ação inválida ou método não permitido
+[18-Apr-2025 22:46:04 Europe/Berlin] Error: Ação inválida ou método não permitido
+[18-Apr-2025 22:46:12 Europe/Berlin] Error: Ação inválida ou método não permitido
+[18-Apr-2025 22:46:15 Europe/Berlin] Error: Ação inválida ou método não permitido
+[18-Apr-2025 22:46:18 Europe/Berlin] Error: Ação inválida ou método não permitido
+[22-Apr-2025 21:59:20 Europe/Berlin] Error: Ação inválida ou método não permitido
+[28-Apr-2025 10:56:52 Europe/Berlin] Error: Ação inválida ou método não permitido

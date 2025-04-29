@@ -1966,65 +1966,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Adicione esta função para inicializar a tabela com dados de exemplo
   function initializeStudentsTable() {
-    // Dados de exemplo para a tabela
-    const sampleStudents = [
-      {
-        id: "STU001",
-        name: "João Silva",
-        class: "Turma 10ª A Informática",
-        gender: "Masculino",
-        contact: "+244 923 456 789",
-        attendance: "90%",
-      },
-      {
-        id: "STU002",
-        name: "Maria Santos",
-        class: "Turma 10ª A Informática",
-        gender: "Feminino",
-        contact: "+244 923 456 790",
-        attendance: "95%",
-      },
-      {
-        id: "STU003",
-        name: "Pedro Oliveira",
-        class: "Turma 10ª B Informática",
-        gender: "Masculino",
-        contact: "+244 923 456 791",
-        attendance: "85%",
-      },
-      {
-        id: "STU004",
-        name: "Ana Costa",
-        class: "Turma 10ª A Informática",
-        gender: "Feminino",
-        contact: "+244 923 456 792",
-        attendance: "92%",
-      },
-      {
-        id: "STU005",
-        name: "Carlos Ferreira",
-        class: "Turma 11ª Informática",
-        gender: "Masculino",
-        contact: "+244 923 456 793",
-        attendance: "88%",
-      },
-      {
-        id: "STU006",
-        name: "Sofia Mendes",
-        class: "Turma 11ª Informática",
-        gender: "Feminino",
-        contact: "+244 923 456 794",
-        attendance: "91%",
-      },
-      {
-        id: "STU007",
-        name: "António Pereira",
-        class: "Turma 12ª Informática",
-        gender: "Masculino",
-        contact: "+244 923 456 795",
-        attendance: "87%",
-      },
-    ]
+   
 
     // Adicionar estudantes ao array
     allStudents = sampleStudents
@@ -3815,7 +3757,7 @@ function loadClasses() {
 
 // Carregar encarregados dinamicamente
 function loadGuardians() {
-  fetch('api/get_guardians.php')
+  fetch('api/guardians.php?action=get')
       .then(response => response.json())
       .then(data => {
           const guardianSelect = document.getElementById('parents');

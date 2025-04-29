@@ -91,7 +91,7 @@
                       <li data-tab="register-teachers">
                           <a href="teachers.php">
                               <i class="fas fa-user-plus"></i> 
-                              <span>Professores/Coordenadores</span>
+                              <span>Professores</span>
                           </a>
                       </li>
                   </ul>

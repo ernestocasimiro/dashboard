@@ -135,7 +135,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                       <li data-tab="register-teachers">
                           <a href="teacher.php">
                               <i class="fas fa-user-plus"></i> 
-                              <span>Professores/Coordenadores</span>
+                              <span>Professores</span>
                           </a>
                       </li>
                   </ul>

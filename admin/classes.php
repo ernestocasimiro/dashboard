@@ -2,35 +2,6 @@
 session_start();
 
 if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
-
-    include('dbconnection.php');
-
-    // INSERÇÃO
-    if (isset($_POST['submit'])) {
-        $classname = $_POST['classname'];
-        $classyear = $_POST['classyear'];
-        $classcapacity = $_POST['classcapacity'];
-        $classdirector = $_POST['classdirector'];
-    
-        // Validação
-        if (empty($classname) || empty($classyear) || empty($classcapacity) || empty($classdirector)) {
-            echo "<script>alert('Por favor preencha todos os campos.');</script>";
-        } else {
-            $stmt = $con->prepare("INSERT INTO classes (classname, classyear, classcapacity, classdirector) VALUES (?, ?, ?, ?)");
-            $stmt->bind_param("ssis", $classname, $classyear, $classcapacity, $classdirector);
-    
-            if ($stmt->execute()) {
-                echo "<script>alert('Dados inseridos com sucesso.');</script>";
-            } else {
-                echo "Erro ao inserir: " . $stmt->error;
-            }
-    
-            $stmt->close();
-        }
-    }
-    
-    // BUSCAR TODAS AS TURMAS
-    $result = mysqli_query($con, "SELECT * FROM classes ORDER BY class_id DESC");
 ?>
 
 <!DOCTYPE html>
@@ -366,7 +337,7 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                       <i class="fas fa-chevron-down arrow"></i>
                   </div>
                   <ul class="submenu">
-                      <li data-tab="register-teachers">
+                      <li data-tab="register-teacher">
                           <a href="teacher.php">
                               <i class="fas fa-user-plus"></i> 
                               <span>Professores/Coordenadores</span>
@@ -465,137 +436,53 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
           </header>
           
           <div class="tab-content">
-              <!-- Gestão Pedagógica - Turmas -->
-              <div class="tab-pane active" id="classes">
-                  <div class="section-header">
-                      <h2>Turmas</h2>
-                      <button class="add-btn" id="add-class-btn">
-                          <i class="fas fa-plus"></i> Adicionar Turma
-                      </button>
-                  </div>
-                  
-                  <div class="filter-controls">
-                      <div class="search-filter">
-                          <input type="text" id="class-search" placeholder="Pesquisar turmas...">
-                      </div>
-                      <div class="dropdown-filter">
-                          <select id="grade-filter">
-                              <option value="">Todos os Anos</option>
-                              <option value="10">10º Ano</option>
-                              <option value="11">11º Ano</option>
-                              <option value="12">12º Ano</option>
-                              <option value="13">13º Ano</option>
-                          </select>
-                      </div>
+    <!-- Gestão Pedagógica - Turmas -->
+<div class="tab-pane active" id="classes">
+    <div class="section-header">
+        <h2>Turmas</h2>
+        <button class="add-btn" id="add-class-btn">
+            <i class="fas fa-plus"></i> Adicionar Turma
+        </button>
+    </div>
 
-                      <!-- Adicione um seletor de turma específico -->
-                      <div class="dropdown-filter">
-                          <select id="class-filter">
-                              <option value="">Todas as Turmas</option>
-                              <option value="Turma 10ª A Informática">Turma 10ª A Informática</option>
-                              <option value="Turma 10ª B Informática">Turma 10ª B Informática</option>
-                              <option value="Turma 11ª Informática">Turma 11ª Informática</option>
-                              <option value="Turma 12ª Informática">Turma 12ª Informática</option>
-                              <option value="Turma 13ª Informática">Turma 13ª Informática</option>
-                          </select>
-                      </div>
-                  </div>
-                  
-                  <div class="table-container">
-                      <table class="data-table">
-                          <thead>
-                              <tr>
-                                  <th>ID</th>
-                                  <th>Nome da Turma</th>
-                                  <th>Ano</th>
-                                  <th>Diretor de Turma</th>
-                                  <th>Nº de Alunos</th>
-                                  <th>Capacidade</th>
-                                  <th>Ações</th>
-                              </tr>
-                          </thead>
-                          <tbody id="class-table-body">
-                              <tr>
-                                  <td>CLS001</td>
-                                  <td>Turma 10ª A Informática</td>
-                                  <td>10º</td>
-                                  <td>Maria Santos</td>
-                                  <td>22</td>
-                                  <td>25</td>
-                                  <td>
-                                      <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-                                      <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
-                                      <button class="action-btn delete" title="Eliminar"><i class="fas fa-trash"></i></button>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>CLS002</td>
-                                  <td>Turma 10ª B Informática</td>
-                                  <td>10º</td>
-                                  <td>João Oliveira</td>
-                                  <td>18</td>
-                                  <td>25</td>
-                                  <td>
-                                      <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-                                      <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
-                                      <button class="action-btn delete" title="Eliminar"><i class="fas fa-trash"></i></button>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>CLS003</td>
-                                  <td>Turma 11ª Informática</td>
-                                  <td>11º</td>
-                                  <td>Ana Costa</td>
-                                  <td>25</td>
-                                  <td>25</td>
-                                  <td>
-                                      <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-                                      <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
-                                      <button class="action-btn delete" title="Eliminar"><i class="fas fa-trash"></i></button>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>CLS004</td>
-                                  <td>Turma 12ª Informática</td>
-                                  <td>12º</td>
-                                  <td>Carlos Ferreira</td>
-                                  <td>20</td>
-                                  <td>25</td>
-                                  <td>
-                                      <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-                                      <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
-                                      <button class="action-btn delete" title="Eliminar"><i class="fas fa-trash"></i></button>
-                                  </td>
-                              </tr>
-                              <tr>
-                                  <td>CLS005</td>
-                                  <td>Turma 13ª Informática</td>
-                                  <td>13º</td>
-                                  <td>Pedro Silva</td>
-                                  <td>15</td>
-                                  <td>25</td>
-                                  <td>
-                                      <button class="action-btn edit" title="Editar"><i class="fas fa-edit"></i></button>
-                                      <button class="action-btn view" title="Ver"><i class="fas fa-eye"></i></button>
-                                      <button class="action-btn delete" title="Eliminar"><i class="fas fa-trash"></i></button>
-                                  </td>
-                              </tr>
-                          </tbody>
-                      </table>
-                  </div>
-                  
-                  <div class="pagination">
-                      <button class="pagination-btn" disabled><i class="fas fa-chevron-left"></i></button>
-                      <button class="pagination-btn active">1</button>
-                      <button class="pagination-btn">2</button>
-                      <button class="pagination-btn">3</button>
-                      <button class="pagination-btn"><i class="fas fa-chevron-right"></i></button>
-                  </div>
-              </div>
-          </div>
-      </main>
-  </div>
-  <!-- Modal para adicionar/editar turmas -->
+    <!-- Filtros simplificados (removido o seletor de turma) -->
+    <div class="filter-controls">
+        <div class="search-filter">
+            <input type="text" id="class-search" placeholder="Pesquisar turmas...">
+        </div>
+        <div class="dropdown-filter">
+            <select id="grade-filter">
+                <option value="">Todos os Anos</option>
+                <option value="10">10º Ano</option>
+                <option value="11">11º Ano</option>
+                <option value="12">12º Ano</option>
+                <option value="13">13º Ano</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- Tabela de turmas -->
+    <div class="table-container">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome da Turma</th>
+                    <th>Ano</th>
+                    <th>Diretor de Turma</th>
+                    <th>Nº de Alunos</th>
+                    <th>Capacidade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="class-table-body">
+                <!-- Linhas dinâmicas serão carregadas via JS -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Modal para adicionar/editar turmas -->
 <div class="modal" id="class-modal">
     <div class="modal-content">
         <div class="modal-header">
@@ -603,15 +490,15 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
             <span class="close-modal">&times;</span>
         </div>
         <div class="modal-body">
-            <form id="class-form">
+            <form id="class-form" method="POST" action="api/classes.php">
                 <div class="form-group">
                     <label for="class-name">Nome da Turma*</label>
                     <input type="text" id="class-name" name="classname" required 
-                           pattern="[A-Za-z0-9\u00C0-\u00FF ]+" 
-                           title="Apenas letras, números e espaços"
-                           placeholder="Ex: Turma 10ª A Informática">
+                        pattern="[A-Za-z0-9\u00C0-\u00FF ]+" 
+                        title="Apenas letras, números e espaços"
+                        placeholder="Ex: Turma 10ª A Informática">
                 </div>
-                
+
                 <div class="form-row">
                     <div class="form-group">
                         <label for="class-grade">Ano*</label>
@@ -623,27 +510,23 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                             <option value="13">13º Ano</option>
                         </select>
                     </div>
-                    
                     <div class="form-group">
                         <label for="class-capacity">Capacidade*</label>
                         <div class="input-with-tag">
-                            <input type="number" id="class-capacity" min="1" max="25" 
-                                   value="25" name="classcapacity" required>
+                            <input type="number" id="class-capacity" name="classcapacity" min="1" max="25" value="25" required>
                             <span class="input-tag">alunos</span>
                         </div>
                         <small>Máximo: 25 alunos</small>
                     </div>
                 </div>
-                
+
                 <div class="form-row">
                     <div class="form-group">
                         <label for="class-director">Diretor de Turma*</label>
                         <select id="class-director" name="classdirector" required>
-                            <option value="">Selecionar Professor</option>
-                            <!-- Opções serão carregadas dinamicamente -->
+                            <option value="">Carregando professores...</option>
                         </select>
                     </div>
-                    
                     <div class="form-group">
                         <label for="class-schedule">Turno</label>
                         <select id="class-schedule" name="classschedule">
@@ -653,13 +536,13 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                         </select>
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="class-students">Alunos</label>
                     <div class="student-selection">
                         <div class="student-list-container" id="student-selection-container">
-                            <!-- Lista de alunos será carregada aqui -->
                             <p class="empty-message">Nenhum aluno selecionado</p>
+                            <input type="hidden" name="student_ids[]" id="selected-student-ids">
                         </div>
                         <button type="button" class="add-student-btn" id="add-students-btn">
                             <i class="fas fa-plus"></i> Adicionar Alunos
@@ -669,13 +552,12 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
                         <span id="selected-students-count">0</span>/<span id="max-students">25</span> alunos selecionados
                     </div>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="class-description">Descrição</label>
-                    <textarea id="class-description" rows="3" 
-                              placeholder="Informações adicionais sobre a turma"></textarea>
+                    <textarea id="class-description" name="classdescription" rows="3" placeholder="Informações adicionais sobre a turma"></textarea>
                 </div>
-                
+
                 <div class="form-actions">
                     <button type="button" class="cancel-btn">Cancelar</button>
                     <button type="submit" class="save-btn">
@@ -709,7 +591,165 @@ if (isset($_SESSION['id']) && isset($_SESSION['role'])) {
         </div>
     </div>
 </div>
+<script>
+// Popula o select de professores via AJAX
+document.addEventListener('DOMContentLoaded', function () {
+    const directorSelect = document.getElementById('class-director');
+
+    // Verificar se o elemento existe antes de tentar carregar os dados
+    if (!directorSelect) {
+        console.error('Elemento select para diretores não encontrado');
+        return;
+    }
+
+    // Mostrar mensagem de carregamento
+    directorSelect.innerHTML = '<option value="">Carregando professores...</option>';
+    
+    // Fazer a requisição para a API
+    fetch('api/teacher.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro na resposta da rede: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Limpar o select e adicionar a opção padrão
+            directorSelect.innerHTML = '<option value="">Selecionar Professor</option>';
+            
+            // Verificar se há dados e se é um array
+            if (Array.isArray(data) && data.length > 0) {
+                // Adicionar cada professor como uma opção
+                data.forEach(teacher => {
+                    const option = document.createElement('option');
+                    option.value = teacher.id;
+                    // Usar o nome completo do professor (concatenando fname e lname se disponíveis)
+                    if (teacher.fname && teacher.lname) {
+                        option.textContent = `${teacher.fname} ${teacher.lname}`;
+                    } else if (teacher.name) {
+                        option.textContent = teacher.name;
+                    } else {
+                        option.textContent = `Professor ID: ${teacher.id}`;
+                    }
+                    directorSelect.appendChild(option);
+                });
+            } else {
+                // Se não houver professores, mostrar mensagem
+                const option = document.createElement('option');
+                option.value = "";
+                option.textContent = "Nenhum professor cadastrado";
+                directorSelect.appendChild(option);
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao carregar professores:', error);
+            // Exibir mensagem de erro no select
+            directorSelect.innerHTML = '<option value="">Erro ao carregar professores</option>';
+        });
+});
+
+// Carregar alunos disponíveis via AJAX
+document.addEventListener('DOMContentLoaded', function() {
+    fetch('api/get_students.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const studentContainer = document.getElementById('available-students');
+                data.data.forEach(student => {
+                    const studentDiv = document.createElement('div');
+                    studentDiv.classList.add('student-item');
+                    studentDiv.textContent = `${student.fname} ${student.lname}`;
+                    studentDiv.dataset.id = student.id;
+                    studentDiv.addEventListener('click', function() {
+                        const selectedStudentIds = document.getElementById('selected-student-ids');
+                        const selectedStudentsCount = document.getElementById('selected-students-count');
+                        let selectedStudents = Array.from(selectedStudentIds.value.split(','));
+
+                        if (selectedStudents.includes(student.id.toString())) {
+                            selectedStudents = selectedStudents.filter(id => id !== student.id.toString());
+                        } else {
+                            selectedStudents.push(student.id);
+                        }
+
+                        selectedStudentIds.value = selectedStudents.join(',');
+                        selectedStudentsCount.textContent = selectedStudents.length;
+                    });
+                    studentContainer.appendChild(studentDiv);
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao carregar alunos:', error);
+        });
+});
+
+// Envio de dados para criar a turma
+document.getElementById('save-class').addEventListener('click', function() {
+    const nome = document.getElementById('class-name').value;
+    const ano = document.getElementById('class-year').value;
+    const capacidade = document.getElementById('class-capacity').value;
+    const diretor_id = document.getElementById('class-director').value; // O valor do diretor selecionado
+    const turno = document.getElementById('class-shift').value;
+    const descricao = document.getElementById('class-description').value;
+    const alunos = document.getElementById('selected-student-ids').value.split(','); // Alunos selecionados
+
+    // Exibindo os dados no console para depuração
+    console.log({
+        nome: nome,
+        ano: ano,
+        capacidade: capacidade,
+        diretor_id: diretor_id,
+        turno: turno,
+        descricao: descricao,
+        alunos: alunos
+    });
+
+    // Validando se os campos obrigatórios estão preenchidos
+    if (!nome || !ano || !diretor_id || !turno) {
+        alert('Preencha todos os campos obrigatórios.');
+        return;
+    }
+
+    const data = {
+        nome: nome,
+        ano: ano,
+        capacidade: capacidade,
+        diretor_id: diretor_id,
+        turno: turno,
+        descricao: descricao,
+        alunos: alunos
+    };
+
+    // Enviar os dados via fetch
+    fetch('api/classes.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('Turma criada com sucesso!');
+        } else {
+            alert('Erro ao criar turma: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao enviar dados para a API:', error);
+        alert('Erro ao salvar a turma.');
+    });
+});
+</script>
+
+
+
+
   <script src="js/script.js"></script>
+  <script src="js/classes.js"></script>
+  <script type="module" src="js/main.js"></script>
+ 
 
   
 

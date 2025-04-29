@@ -1,13 +1,19 @@
-<?php
-// dbconnection.php
-$host = 'localhost';
-$dbname = 'escolabd';
-$username = 'root';
-$password = '';
+<?php 
 
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
-    // ... restante do código
-} catch (PDOException $e) {
-    die("Erro na conexão: " . $e->getMessage());
+$sName="localhost";
+$uNname="root";
+$pass="";
+$db_name="escolabd";
+
+try{
+
+    $conn = new PDO("mysql:host=$sName;dbname=$db_name", $uNname, $pass);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+}catch(PDOException $e){
+    echo "Connection failed: " . $e->getMessage();
+    exit;
 }
+
+
+
+?>

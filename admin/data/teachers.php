@@ -6,17 +6,15 @@ if (!isset($_SESSION['id']) || !isset($_SESSION['role'])) {
     exit;
 }
 
-require_once 'db_connection.php';
-
-
+require_once 'dbconnection.php';
 
 // Processar o formulário quando enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_teacher'])) {
     try {
         // Validar e sanitizar os dados
-        $full_name = filter_input(INPUT_POST, 'teacher-name', FILTER_SANITIZE_STRING);
+        $name = filter_input(INPUT_POST, 'teacher-name', FILTER_SANITIZE_STRING);
         $gender = filter_input(INPUT_POST, 'teacher-gender', FILTER_SANITIZE_STRING);
-        $date_of_birth = filter_input(INPUT_POST, 'teacher-dob', FILTER_SANITIZE_STRING);
+        $dob = filter_input(INPUT_POST, 'teacher-dob', FILTER_SANITIZE_STRING);
         $bi_number = filter_input(INPUT_POST, 'bi-number', FILTER_SANITIZE_STRING);
         $address = filter_input(INPUT_POST, 'teacher-address', FILTER_SANITIZE_STRING);
         $country_code = filter_input(INPUT_POST, 'country-code', FILTER_SANITIZE_STRING);
@@ -27,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_teacher'])) {
         $is_coordinator = isset($_POST['is_coordinator']) ? 1 : 0;
 
         // Validações básicas
-        if (empty($full_name) || empty($gender) || empty($date_of_birth) || empty($bi_number) || 
+        if (empty($name) || empty($gender) || empty($dob) || empty($bi_number) || 
             empty($address) || empty($phone_number) || empty($email) || empty($password)) {
             throw new Exception("Todos os campos obrigatórios devem ser preenchidos.");
         }
@@ -71,14 +69,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_teacher'])) {
         $pdo->beginTransaction();
 
         // Inserir o professor na tabela teachers
-        $stmt = $pdo->prepare("INSERT INTO teachers 
-            (full_name, gender, date_of_birth, bi_number, bi_front_image, bi_back_image, 
-             address, country_code, phone_number, email, password_hash, is_coordinator) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO teachers
+            (name, gender, dob, bi_number, address, contact, email, password, created_at, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)");
 
         $stmt->execute([
-            $full_name, $gender, $date_of_birth, $bi_number, $bi_front_image, $bi_back_image,
-            $address, $country_code, $phone_number, $email, $password_hash, $is_coordinator
+            $name, $gender, $dob, $bi_number, $address,
+            $country_code . $phone_number, $email, $password_hash
         ]);
 
         $teacher_id = $pdo->lastInsertId();
@@ -87,9 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['save_teacher'])) {
         if (!empty($subjects)) {
             $stmt = $pdo->prepare("INSERT INTO teacher_subjects (teacher_id, subject_id, academic_year) 
                                   VALUES (?, ?, ?)");
-            
-            $academic_year = date('Y') . '-' . (date('Y') + 1); // Ex: 2023-2024
-            
+
+            $academic_year = date('Y') . '-' . (date('Y') + 1); // Ex: 2024-2025
+
             foreach ($subjects as $subject_id) {
                 $stmt->execute([$teacher_id, $subject_id, $academic_year]);
             }
